@@ -1,0 +1,12 @@
+<mat-card>
+  <mat-card-header>
+    <h1>{{title}}</h1>
+  </mat-card-header>
+  <mat-card-content>
+    <step1 *ngIf="currentStep == 1" [apiData]="apiData" (callback)="onConfirm($event)"></step1>
+    <step2 *ngIf="currentStep == 2" (callback)="onConfirm($event)"></step2>
+    <step3 *ngIf="currentStep == 3" [apiData]="apiData" [profileData]="profileData"></step3>
+  </mat-card-content>
+</mat-card>
+
+

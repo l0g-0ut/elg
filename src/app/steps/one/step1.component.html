@@ -1,0 +1,15 @@
+<h3>Please enter your API Data</h3>
+<p>Keep in mind: It is not a good idea to enter your API data into an application you don't trust.</p>
+<form>
+  <mat-form-field appearance="fill">
+    <mat-label>API User</mat-label>
+    <input matInput [(ngModel)]="apiData.apiUser" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>API Key</mat-label>
+    <input matInput [(ngModel)]="apiData.apiKey" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <br>
+  <button type="button" mat-raised-button color="primary" (click)="callback.emit(true)">Confirm</button>
+</form>

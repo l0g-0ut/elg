@@ -1,0 +1,13 @@
+<div *ngIf="error === false">
+  <p>You won {{iterations.length}} iterations.</p>
+  <p *ngIf="this.currentIteration === null"><b>We will start in a few seconds...</b></p>
+  <div style="border: 1px #333333" *ngIf="this.currentIteration !== null">
+    <h1>Iteration #{{currentIteration.iteration}}</h1>
+    <p>Adding time: <b>{{currentIteration.addingTime|secTransform}}</b></p>
+    <p>Adding required link clicks: <b>{{currentIteration.addingReq}}</b></p>
+  </div>
+  <p *ngIf="currentIteration !== null && currentIteration.iteration >= iterations.length">That's it. Have fun!</p>
+</div>
+<div *ngIf="error !== false">
+  <p>Sorry, your data seems to be wrong. Please reload this page and start all over.</p>
+</div>

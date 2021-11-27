@@ -1,0 +1,122 @@
+{
+  "teaser": {
+    "inFeelingLucky": false,
+    "iterations": {
+      "min": 0,
+      "max": 0,
+      "fix": 1
+    },
+    "sleeps": {
+      "min": 10,
+      "max": 20
+    },
+    "penalty": {
+      "time": {
+        "enabled": true,
+        "min": 10,
+        "max": 120
+      },
+      "requirements": {
+        "enabled": false,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  "easy": {
+    "inFeelingLucky": true,
+    "iterations": {
+      "min": 0,
+      "max": 0,
+      "fix": 3
+    },
+    "sleeps": {
+      "min": 15,
+      "max": 30
+    },
+    "penalty": {
+      "time": {
+        "enabled": true,
+        "min": 600,
+        "max": 1800
+      },
+      "requirements": {
+        "enabled": true,
+        "min": 0,
+        "max": 2
+      }
+    }
+  },
+  "medium": {
+    "inFeelingLucky": true,
+    "iterations": {
+      "min": 5,
+      "max": 10,
+      "fix": null
+    },
+    "sleeps": {
+      "min": 10,
+      "max": 45
+    },
+    "penalty": {
+      "time": {
+        "enabled": true,
+        "min": 1800,
+        "max": 21600
+      },
+      "requirements": {
+        "enabled": true,
+        "min": 1,
+        "max": 25
+      }
+    }
+  },
+  "heavy": {
+    "inFeelingLucky": true,
+    "iterations": {
+      "min": 25,
+      "max": 100,
+      "fix": null
+    },
+    "sleeps": {
+      "min": 20,
+      "max": 60
+    },
+    "penalty": {
+      "time": {
+        "enabled": true,
+        "min": 86400,
+        "max": 864000
+      },
+      "requirements": {
+        "enabled": true,
+        "min": 50,
+        "max": 500
+      }
+    }
+  },
+  "impossible": {
+    "inFeelingLucky": false,
+    "iterations": {
+      "min": 250,
+      "max": 1000,
+      "fix": null
+    },
+    "sleeps": {
+      "min": 30,
+      "max": 90
+    },
+    "penalty": {
+      "time": {
+        "enabled": true,
+        "min": 86400,
+        "max": 1296000
+      },
+      "requirements": {
+        "enabled": true,
+        "min": 500,
+        "max": 5000
+      }
+    }
+  }
+}
