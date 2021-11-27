@@ -118,5 +118,29 @@
         "max": 5000
       }
     }
+  },
+  "casino": {
+    "inFeelingLucky": false,
+    "iterations": {
+      "min": 1,
+      "max": 1000,
+      "fix": null
+    },
+    "sleeps": {
+      "min": 2,
+      "max": 90
+    },
+    "penalty": {
+      "time": {
+        "enabled": true,
+        "min": 1,
+        "max": 31449600
+      },
+      "requirements": {
+        "enabled": true,
+        "min": 1,
+        "max": 5000
+      }
+    }
   }
 }
