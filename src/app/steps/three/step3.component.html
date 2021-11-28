@@ -6,7 +6,7 @@
     <p>Adding time: <b>{{currentIteration.addingTime|secTransform}}</b></p>
     <p>Adding required link clicks: <b>{{currentIteration.addingReq}}</b></p>
   </div>
-  <p *ngIf="currentIteration !== null && currentIteration.iteration >= iterations.length">That's it. Have fun!</p>
+  <h1 *ngIf="currentIteration !== null && currentIteration.iteration >= iterations.length">That's it. Have fun!</h1>
 </div>
 <div *ngIf="error !== false">
   <p>Sorry, your data seems to be wrong. Please reload this page and start all over.</p>

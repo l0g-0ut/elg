@@ -48,7 +48,11 @@
           </tr>
         </tbody>
       </table>
-      <button type="button" mat-raised-button color="primary" (click)="selectProfile(profileData[pk])">select »{{pk}}«</button>
+      <div style="text-align: center">
+        <button type="button" mat-raised-button color="primary" (click)="selectProfile(profileData[pk])">select »{{pk}}«</button>
+        <br>
+        <small>We'll start immediately after you clicked this button! Be careful!</small>
+      </div>
     </mat-tab>
     <!--
     <mat-tab label="custom">

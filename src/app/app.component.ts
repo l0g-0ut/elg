@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   public profileData: ProfileData | null = null;
   public currentStep = 1;
 
-  public title: string = 'Play the Game';
+  public title: string = 'Welcome, stranger!';
 
   private step1Confirm() {
     if (this.apiData.apiKey != '' && this.apiData.apiUser != '') {
