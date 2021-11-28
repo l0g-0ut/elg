@@ -1,8 +1,9 @@
-<h3>Please enter your API Data</h3>
+<h3>Please enter your EmlaLock API Data</h3>
 <p>Keep in mind: It is not a good idea to enter your API data into an application you don't trust.</p>
+<p><em>You can find your credentils under <b><a href="https://www.emlalock.com/#/settings" class="white">Settings</a></b> in the tab <b>API</b>!</em></p>
 <form>
   <mat-form-field appearance="fill">
-    <mat-label>API User</mat-label>
+    <mat-label>User ID</mat-label>
     <input matInput [(ngModel)]="apiData.apiUser" [ngModelOptions]="{standalone: true}">
   </mat-form-field>
   <br>
@@ -11,5 +12,10 @@
     <input matInput [(ngModel)]="apiData.apiKey" [ngModelOptions]="{standalone: true}">
   </mat-form-field>
   <br>
+  <p><b>Your API credentials will not be saved and are only transmitted to the EmlaLock API. Everything runs locally on your computer/tablet/smartphone.</b> If you want, check the source code of this app: <a class="white" href="https://github.com/l0g-0ut/elg">github.com/l0g-0ut/elg</a>.</p>
+  <br>
   <button type="button" mat-raised-button color="primary" (click)="callback.emit(true)">Confirm</button>
+  <br>
+  <br>
+  <p><small>This service is not affiliated with EmlaLock!</small></p>
 </form>
