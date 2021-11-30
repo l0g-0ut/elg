@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiData} from "./model/api-data";
 import {ProfileData} from "./services/profile.service";
+import {faExclamationTriangle, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,9 @@ import {ProfileData} from "./services/profile.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  faReload = faSyncAlt;
+  faWarning = faExclamationTriangle;
 
   public apiData: ApiData;
   public profileData: ProfileData | null = null;

@@ -1,12 +1,26 @@
-<div flex="33" class="container">
-  <mat-card>
-    <mat-card-title>Play the Game</mat-card-title>
-    <mat-card-subtitle>{{title}}</mat-card-subtitle>
-    <mat-card-content>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Play the Game | v2</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="?"><fa-icon [fixedWidth]="true" [icon]="faReload"></fa-icon>Restart</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid mt-5">
+  <div class="card bg-light text-dark">
+    <h1 class="card-header">{{title}}</h1>
+    <div class="card-body">
       <step1 *ngIf="currentStep == 1" [apiData]="apiData" (callback)="onConfirm($event)"></step1>
       <step2 *ngIf="currentStep == 2" (callback)="onConfirm($event)"></step2>
       <step3 *ngIf="currentStep == 3" [apiData]="apiData" [profileData]="profileData"></step3>
       <builder *ngIf="currentStep == -1"></builder>
-    </mat-card-content>
-  </mat-card>
+    </div>
+    <div class="card-footer">
+      <small><span class="text-warning"><fa-icon [fixedWidth]="true" [icon]="faWarning"></fa-icon></span> You need an EmlaLock account and a running session to use this app!</small>
+    </div>
+  </div>
 </div>

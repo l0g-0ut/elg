@@ -1,61 +1,66 @@
-<p *ngIf="error !== null" style="color: red">Unable to load profiles. Try again later.</p>
+<div *ngIf="error !== null" class="alert alert-danger" role="alert">
+  Unable to load profiles. Try again later.
+</div>
 
-<mat-tab-group *ngIf="error === null && profileData !== null">
-    <mat-tab *ngFor="let pk of profileDataKeys" [label]="pk">
-      <table>
-        <tbody>
-          <tr>
-            <th>Number of Iterations:</th>
-            <td *ngIf="profileData[pk].iterations.fix !== null">
-              {{profileData[pk].iterations.fix}}
-            </td>
-            <td *ngIf="profileData[pk].iterations.fix === null">
-              <b>RANDOM</b> between {{ profileData[pk].iterations.min }} and {{ profileData[pk].iterations.max }}
-            </td>
-          </tr>
-          <tr>
-            <th>For every Iteration:</th>
-            <td style="padding: 0">
-              <table>
-                <tbody>
-                  <tr>
-                    <th>Sleep time before Iteration:</th>
-                    <td>
-                      <b>RANDOM</b> between <i>{{ profileData[pk].sleeps.min|secTransform }}</i> and <i>{{ profileData[pk].sleeps.max|secTransform }}</i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Time to be added:</th>
-                    <td *ngIf="profileData[pk].penalty.time.enabled === true">
-                      <b>RANDOM</b> between <i>{{ profileData[pk].penalty.time.min|secTransform }}</i> and <i>{{ profileData[pk].penalty.time.max|secTransform }}</i>
-                    </td>
-                    <td *ngIf="profileData[pk].penalty.time.enabled !== true">
-                      No time will be added
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Required link clicks to be added:</th>
-                    <td *ngIf="profileData[pk].penalty.requirements.enabled === true">
-                      <b>RANDOM</b> between <i>{{ profileData[pk].penalty.requirements.min }}</i> and <i>{{ profileData[pk].penalty.requirements.max }}</i>
-                    </td>
-                    <td *ngIf="profileData[pk].penalty.requirements.enabled !== true">
-                      No required click will be added
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div style="text-align: center">
-        <button type="button" mat-raised-button color="primary" (click)="selectProfile(profileData[pk])">select »{{pk}}«</button>
-        <br>
-        <small>We'll start immediately after you clicked this button! Be careful!</small>
-      </div>
-    </mat-tab>
-    <!--
-    <mat-tab label="custom">
-    </mat-tab>
-    -->
-</mat-tab-group>
+<div *ngIf="error === null && profileData !== null">
+  <ul ngbNav #pSelect="ngbNav" class="nav nav-pills justify-content-center">
+    <li ngbNavItem *ngFor="let pk of profileDataKeys">
+      <a ngbNavLink>{{pk}}</a>
+      <ng-template ngbNavContent>
+        <table class="table table-sm table-striped">
+          <tbody>
+            <tr>
+              <th>Number of Iterations:</th>
+              <td *ngIf="profileData[pk].iterations.fix !== null">
+                {{profileData[pk].iterations.fix}}
+              </td>
+              <td *ngIf="profileData[pk].iterations.fix === null">
+                <b>RANDOM</b> between {{ profileData[pk].iterations.min }} and {{ profileData[pk].iterations.max }}
+              </td>
+            </tr>
+            <tr>
+              <th class="pt-3">For every Iteration:</th>
+              <td class="pt-3">
+                <table class="table table-sm table-striped">
+                  <tbody>
+                    <tr>
+                      <th>Sleep time before Iteration:</th>
+                      <td>
+                        <b>RANDOM</b> between <i>{{ profileData[pk].sleeps.min|secTransform }}</i> and <i>{{ profileData[pk].sleeps.max|secTransform }}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Time to be added:</th>
+                      <td *ngIf="profileData[pk].penalty.time.enabled === true">
+                        <b>RANDOM</b> between <i>{{ profileData[pk].penalty.time.min|secTransform }}</i> and <i>{{ profileData[pk].penalty.time.max|secTransform }}</i>
+                      </td>
+                      <td *ngIf="profileData[pk].penalty.time.enabled !== true">
+                        No time will be added
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Required link clicks to be added:</th>
+                      <td *ngIf="profileData[pk].penalty.requirements.enabled === true">
+                        <b>RANDOM</b> between <i>{{ profileData[pk].penalty.requirements.min }}</i> and <i>{{ profileData[pk].penalty.requirements.max }}</i>
+                      </td>
+                      <td *ngIf="profileData[pk].penalty.requirements.enabled !== true">
+                        No required click will be added
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="text-align: center">
+          <button type="button" class="btn btn-primary btn-lg" (click)="selectProfile(profileData[pk])">select »{{pk}}«</button>
+          <br>
+          <small>We'll start immediately after you clicked this button! Be careful!</small>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+  <hr>
+  <div [ngbNavOutlet]="pSelect"></div>
+</div>

@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {ApiData} from "../../model/api-data";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {ProfileData, ProfileResponse, ProfileService} from "../../services/profile.service";
 
 @Component({
