@@ -12,6 +12,7 @@ import {Step3Component} from "./steps/three/step3.component";
 import {BuilderComponent} from "./steps/builder/builder.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {TimeinputComponent} from "./components/timeinput/timeinput.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     Step3Component,
     BuilderComponent,
     SecTransformPipe,
+    TimeinputComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,27 @@
+<label>{{label}}</label>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="week">Weeks</label>
+      <input (change)="valueChanged()" [(ngModel)]="weeks" [ngModelOptions]="formModelOptions" type="number" min="0" class="form-control" id="week">
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="day">Days</label>
+      <input (change)="valueChanged()" [(ngModel)]="days" [ngModelOptions]="formModelOptions" type="number" min="0" class="form-control" id="day">
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="hour">Hours</label>
+      <input (change)="valueChanged()" [(ngModel)]="hours" [ngModelOptions]="formModelOptions" type="number" min="0" class="form-control" id="hour">
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="minute">Minutes</label>
+      <input (change)="valueChanged()" [(ngModel)]="minutes" [ngModelOptions]="formModelOptions" type="number" min="0" class="form-control" id="minute">
+    </div>
+  </div>
+</div>

@@ -1,5 +1,93 @@
-<h2>Profile Link Builder</h2>
+<h2>Build your own profile here!</h2>
 <p>This allows you to create a profile and a link to share it. If your wearer uses the link, they'll only see the settings you defined for them.</p>
-
 <form>
+  <fieldset class="border-bottom mb-3 pb-3">
+    <legend>Basic Options</legend>
+    <div class="form-group">
+      <label for="proName">Profile Name</label>
+      <input [(ngModel)]="profileData.profileName" [ngModelOptions]="formModelOptions" type="text" class="form-control" id="proName">
+    </div>
+    <div class="form-check form-check-inline mt-3">
+      <input class="form-check-input" type="checkbox" id="showDetails" [(ngModel)]="profileData.settingsShown" [ngModelOptions]="formModelOptions">
+      <label class="form-check-label" for="showDetails">Show settings to the user? <em>If not set, your user would know even less what's coming.</em></label>
+    </div>
+  </fieldset>
+  <fieldset class="border-bottom mb-3 pb-3">
+    <legend>Iterations</legend>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-check form-check-inline">
+          <input #enFixIt class="form-check-input" type="checkbox" id="enFixedIter" (change)="changeFixedIter($event)">
+          <label class="form-check-label" for="enFixedIter">Enable fixed iterations</label>
+        </div>
+        <div class="form-group">
+          <label for="fixedIter">Fixed number of iterations</label>
+          <input [disabled]="profileData.settings.iterations.fix === null" [(ngModel)]="profileData.settings.iterations.fix" [ngModelOptions]="formModelOptions" type="number" min="1" class="form-control" id="fixedIter" aria-describedby="iterHelp">
+          <small id="iterHelp" class="form-text text-muted">If you set a number of fixed iterations, the random generator for iterations gets disabled.</small>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <strong>Random</strong>
+        <div class="form-group">
+          <label for="minIter">Minimum number of iterations</label>
+          <input [disabled]="profileData.settings.iterations.fix !== null" [(ngModel)]="profileData.settings.iterations.min" [ngModelOptions]="formModelOptions" type="number" min="1" class="form-control" id="minIter">
+        </div>
+        <div class="form-group">
+          <label for="maxIter">Maximum number of iterations</label>
+          <input [disabled]="profileData.settings.iterations.fix !== null" [(ngModel)]="profileData.settings.iterations.max" [ngModelOptions]="formModelOptions" type="number" min="1" class="form-control" id="maxIter">
+        </div>
+      </div>
+    </div>
+    <h6 class="mt-2">Sleep Time before iterations</h6>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="minSleep">Minimum number of seconds to sleep</label>
+          <input [(ngModel)]="profileData.settings.sleeps.min" [ngModelOptions]="formModelOptions" type="number" min="1" class="form-control" id="minSleep">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="maxSleep">Maximum number of seconds to sleep</label>
+          <input [(ngModel)]="profileData.settings.sleeps.max" [ngModelOptions]="formModelOptions" type="number" min="5" class="form-control" id="maxSleep">
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset class="border-bottom mb-3 pb-3">
+    <legend>Penalties (per iteration)</legend>
+    <h6 class="mt-2">Adding time</h6>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="penTimeEn" [(ngModel)]="profileData.settings.penalty.time.enabled" [ngModelOptions]="formModelOptions">
+      <label class="form-check-label" for="penTimeEn">Enabled</label>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <time label="Minimum time to be added" [(model)]="profileData.settings.penalty.time.min"></time>
+      </div>
+      <div class="col-md-6">
+        <time label="Maximum time to be added" [(model)]="profileData.settings.penalty.time.max"></time>
+      </div>
+    </div>
+    <h6 class="mt-3">Adding requirements</h6>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="penReqEn" [(ngModel)]="profileData.settings.penalty.requirements.enabled" [ngModelOptions]="formModelOptions">
+      <label class="form-check-label" for="penReqEn">Enabled</label>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="minReq">Minimum number of requirements to be added</label>
+          <input [disabled]="!profileData.settings.penalty.requirements.enabled" [(ngModel)]="profileData.settings.penalty.requirements.min" [ngModelOptions]="formModelOptions" type="number" min="0" class="form-control" id="minReq">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="maxReq">Maximum number of requirements to be added</label>
+          <input [disabled]="!profileData.settings.penalty.requirements.enabled" [(ngModel)]="profileData.settings.penalty.requirements.max" [ngModelOptions]="formModelOptions" type="number" min="1" class="form-control" id="maxReq">
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <button class="btn btn-primary btn-lg" type="button" (click)="buildLink()"><fa-icon [icon]="faBuild" [fixedWidth]="true"></fa-icon> Build Link</button>
 </form>
