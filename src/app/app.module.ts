@@ -13,6 +13,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatTabsModule} from "@angular/material/tabs";
 import {SecTransformPipe} from "./pipe/sec.transform.pipe";
 import {Step3Component} from "./steps/three/step3.component";
+import {BuilderComponent} from "./steps/builder/builder.component";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -20,6 +23,7 @@ import {Step3Component} from "./steps/three/step3.component";
     Step1Component,
     Step2Component,
     Step3Component,
+    BuilderComponent,
     SecTransformPipe,
   ],
   imports: [
@@ -31,6 +35,8 @@ import {Step3Component} from "./steps/three/step3.component";
     FormsModule,
     HttpClientModule,
     MatTabsModule,
+    MatCheckboxModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

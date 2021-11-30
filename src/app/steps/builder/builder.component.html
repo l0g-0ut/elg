@@ -1,0 +1,19 @@
+<h2>Profile Link Builder</h2>
+<p>This allows you to create a profile and a link to share it. If your wearer uses the link, they'll only see the settings you defined for them.</p>
+
+<form>
+  <section>
+    <h3>Basic sessings</h3>
+    <mat-checkbox class="example-margin" [(ngModel)]="profileData.settingsShown" [ngModelOptions]="{standalone: true}">Show profile settings to the link user before executing them</mat-checkbox>
+  </section>
+  <section>
+    <h3>Number of Iterations</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Fixed number of iterations</mat-label>
+      <input matInput type="number" aria-valuemin="0" aria-valuemax="9999999999" [(ngModel)]="profileData.settings.iterations.fix" [ngModelOptions]="{standalone: true}">
+      <button *ngIf="profileData.settings.iterations.fix" matSuffix mat-icon-button aria-label="Clear" (click)="profileData.settings.iterations.fix=null">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </section>
+</form>

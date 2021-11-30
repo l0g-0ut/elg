@@ -28,8 +28,14 @@ export class AppComponent implements OnInit {
     this.title = 'Let\'s see how lucky you are';
   }
 
+  private launchLinkBuilder() {
+    this.title = 'Profile Link Builder';
+    this.currentStep = -1;
+  }
+
   public onConfirm(confirm: boolean | ProfileData) {
     if (confirm === false) {
+      this.launchLinkBuilder();
       return;
     }
     switch (this.currentStep) {
