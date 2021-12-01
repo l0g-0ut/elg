@@ -12,6 +12,8 @@ import {UserDefinedLink} from "./model/udl";
 })
 export class AppComponent implements OnInit {
 
+  isMenuCollapsed = true;
+
   faReload = faSyncAlt;
   faWarning = faExclamationTriangle;
 
