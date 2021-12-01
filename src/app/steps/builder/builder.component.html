@@ -1,11 +1,12 @@
 <h2>Build your own profile here!</h2>
 <p>This allows you to create a profile and a link to share it. If your wearer uses the link, they'll only see the settings you defined for them.</p>
-<form>
+<form (submit)="buildLink()">
   <fieldset class="border-bottom mb-3 pb-3">
     <legend>Basic Options</legend>
     <div class="form-group">
-      <label for="proName">Profile Name</label>
-      <input [(ngModel)]="profileData.profileName" [ngModelOptions]="formModelOptions" type="text" class="form-control" id="proName">
+      <label for="proName" [ngClass]="{'form-label': true, 'text-danger': errors.name !== null}">Profile Name</label>
+      <input [ngClass]="{'form-control': true, 'is-invalid': errors.name !== null}" [(ngModel)]="profileData.profileName" [ngModelOptions]="formModelOptions" type="text" id="proName">
+      <div *ngIf="errors.name !== null" class="invalid-feedback">{{errors.name}}</div>
     </div>
     <div class="form-check form-check-inline mt-3">
       <input class="form-check-input" type="checkbox" id="showDetails" [(ngModel)]="profileData.settingsShown" [ngModelOptions]="formModelOptions">
@@ -17,24 +18,28 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-check form-check-inline">
-          <input #enFixIt class="form-check-input" type="checkbox" id="enFixedIter" (change)="changeFixedIter($event)">
-          <label class="form-check-label" for="enFixedIter">Enable fixed iterations</label>
+          <input #fixedIterEnabled [ngClass]="{'form-check-input': true, 'is-invalid': errors.enableFixIterations !== null}" type="checkbox" id="enFixedIter" (change)="changeFixedIter($event)">
+          <label [ngClass]="{'form-check-label': true, 'text-danger': errors.enableFixIterations !== null}" for="enFixedIter">Enable fixed iterations</label>
+          <div *ngIf="errors.enableFixIterations !== null" class="invalid-feedback">{{errors.enableFixIterations}}</div>
         </div>
         <div class="form-group">
-          <label for="fixedIter">Fixed number of iterations</label>
-          <input [disabled]="profileData.settings.iterations.fix === null" [(ngModel)]="profileData.settings.iterations.fix" [ngModelOptions]="formModelOptions" type="number" min="1" class="form-control" id="fixedIter" aria-describedby="iterHelp">
+          <label [ngClass]="{'form-label': true, 'text-danger': errors.fixIterations !== null}" for="fixedIter">Fixed number of iterations</label>
+          <input [ngClass]="{'form-control': true, 'is-invalid': errors.fixIterations !== null}" [disabled]="profileData.settings.iterations.fix === null && !fixedIterEnabled.checked" [(ngModel)]="profileData.settings.iterations.fix" [ngModelOptions]="formModelOptions" type="number" min="1" id="fixedIter" aria-describedby="iterHelp">
+          <div *ngIf="errors.fixIterations !== null" class="invalid-feedback">{{errors.fixIterations}}</div>
           <small id="iterHelp" class="form-text text-muted">If you set a number of fixed iterations, the random generator for iterations gets disabled.</small>
         </div>
       </div>
       <div class="col-md-6">
         <strong>Random</strong>
         <div class="form-group">
-          <label for="minIter">Minimum number of iterations</label>
-          <input [disabled]="profileData.settings.iterations.fix !== null" [(ngModel)]="profileData.settings.iterations.min" [ngModelOptions]="formModelOptions" type="number" min="1" class="form-control" id="minIter">
+          <label [ngClass]="{'form-label': true, 'text-danger': errors.iterMin !== null}" for="minIter">Minimum number of iterations</label>
+          <input [ngClass]="{'form-control': true, 'is-invalid': errors.iterMin !== null}" [disabled]="profileData.settings.iterations.fix !== null || fixedIterEnabled.checked" [(ngModel)]="profileData.settings.iterations.min" [ngModelOptions]="formModelOptions" type="number" min="1" id="minIter">
+          <div *ngIf="errors.iterMin !== null" class="invalid-feedback">{{errors.iterMin}}</div>
         </div>
         <div class="form-group">
-          <label for="maxIter">Maximum number of iterations</label>
-          <input [disabled]="profileData.settings.iterations.fix !== null" [(ngModel)]="profileData.settings.iterations.max" [ngModelOptions]="formModelOptions" type="number" min="1" class="form-control" id="maxIter">
+          <label [ngClass]="{'form-label': true, 'text-danger': errors.iterMax !== null}" for="maxIter">Maximum number of iterations</label>
+          <input [ngClass]="{'form-control': true, 'is-invalid': errors.iterMax !== null}" [disabled]="profileData.settings.iterations.fix !== null || fixedIterEnabled.checked" [(ngModel)]="profileData.settings.iterations.max" [ngModelOptions]="formModelOptions" type="number" min="1" id="maxIter">
+          <div *ngIf="errors.iterMax !== null" class="invalid-feedback">{{errors.iterMax}}</div>
         </div>
       </div>
     </div>
@@ -42,14 +47,16 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="minSleep">Minimum number of seconds to sleep</label>
-          <input [(ngModel)]="profileData.settings.sleeps.min" [ngModelOptions]="formModelOptions" type="number" min="1" class="form-control" id="minSleep">
+          <label [ngClass]="{'form-label': true, 'text-danger': errors.sleepMin !== null}" for="minSleep">Minimum number of seconds to sleep</label>
+          <input [ngClass]="{'form-control': true, 'is-invalid': errors.sleepMin !== null}" [(ngModel)]="profileData.settings.sleeps.min" [ngModelOptions]="formModelOptions" type="number" min="1" id="minSleep">
+          <div *ngIf="errors.sleepMin !== null" class="invalid-feedback">{{errors.sleepMin}}</div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label for="maxSleep">Maximum number of seconds to sleep</label>
-          <input [(ngModel)]="profileData.settings.sleeps.max" [ngModelOptions]="formModelOptions" type="number" min="5" class="form-control" id="maxSleep">
+          <label [ngClass]="{'form-label': true, 'text-danger': errors.sleepMax !== null}" for="maxSleep">Maximum number of seconds to sleep</label>
+          <input [ngClass]="{'form-control': true, 'is-invalid': errors.sleepMax !== null}" [(ngModel)]="profileData.settings.sleeps.max" [ngModelOptions]="formModelOptions" type="number" min="5" id="maxSleep">
+          <div *ngIf="errors.sleepMax !== null" class="invalid-feedback">{{errors.sleepMax}}</div>
         </div>
       </div>
     </div>
@@ -63,10 +70,10 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <time label="Minimum time to be added" [(model)]="profileData.settings.penalty.time.min"></time>
+        <time [enabled]="profileData.settings.penalty.time.enabled" [fieldError]="errors.timeMin" label="Minimum time to be added" [(model)]="profileData.settings.penalty.time.min"></time>
       </div>
       <div class="col-md-6">
-        <time label="Maximum time to be added" [(model)]="profileData.settings.penalty.time.max"></time>
+        <time [enabled]="profileData.settings.penalty.time.enabled" [fieldError]="errors.timeMax" label="Maximum time to be added" [(model)]="profileData.settings.penalty.time.max"></time>
       </div>
     </div>
     <h6 class="mt-3">Adding requirements</h6>
@@ -89,5 +96,15 @@
       </div>
     </div>
   </fieldset>
-  <button class="btn btn-primary btn-lg" type="button" (click)="buildLink()"><fa-icon [icon]="faBuild" [fixedWidth]="true"></fa-icon> Build Link</button>
+  <button class="btn btn-primary btn-lg" type="submit"><fa-icon [icon]="faBuild" [fixedWidth]="true"></fa-icon> Build Link</button>
 </form>
+<div *ngIf="generatedLink !== null" class="card mt-3 bg-success text-white">
+  <h4 class="card-header"><fa-icon [fixedWidth]="true" [icon]="faReady"></fa-icon> Your link is ready!</h4>
+  <div class="card-body">
+    <p class="card-text">Copy and use the following link to let someone execute your profile:</p>
+    <strong><a class="text-white" href="{{generatedLink}}">{{generatedLink}}</a></strong>
+  </div>
+  <div class="card-footer">
+    <small>Not exactly what you wanted? Just change your settings and hit the Build button again!</small>
+  </div>
+</div>

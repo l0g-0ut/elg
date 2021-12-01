@@ -3,16 +3,16 @@
 </h2>
 <p>Keep in mind: It is not a good idea to enter your API data into an application you don't trust.</p>
 <div class="alert alert-info"><fa-icon [icon]="faInfo" [fixedWidth]="true"></fa-icon> You can find your credentils under <b><a href="https://www.emlalock.com/#/settings">Settings</a></b> in the tab <b>API</b>!</div>
-<form>
+<form (submit)="submit()">
   <div class="mb-1">
-    <label for="apiUserID" class="form-label">User ID</label>
-    <input type="text" class="form-control" id="apiUserID" placeholder="" [(ngModel)]="apiData.apiUser" [ngModelOptions]="{standalone: true}">
+    <label for="apiUserID" [ngClass]="{'form-label': true, 'text-danger': apiUserValidated === false}">User ID</label>
+    <input (change)="validateUser()" (keyup)="validateUser()" [ngClass]="{'form-control': true, 'is-valid': apiUserValidated === true, 'is-invalid': apiUserValidated === false}" [pattern]="userPattern" type="text" id="apiUserID" [(ngModel)]="apiData.apiUser" [ngModelOptions]="{standalone: true}">
   </div>
   <div class="mb-1">
-    <label for="apiKey" class="form-label">API Key</label>
-    <input type="text" class="form-control" id="apiKey" placeholder="" [(ngModel)]="apiData.apiKey" [ngModelOptions]="{standalone: true}">
+    <label for="apiKey" [ngClass]="{'form-label': true, 'text-danger': apiKeyValidated === false}">API Key</label>
+    <input (change)="validateKey()" (keyup)="validateKey()" [ngClass]="{'form-control': true, 'is-valid': apiKeyValidated === true, 'is-invalid': apiKeyValidated === false}" [pattern]="keyPattern" type="text" id="apiKey" [(ngModel)]="apiData.apiKey" [ngModelOptions]="{standalone: true}">
   </div>
   <div class="alert alert-warning mt-5 mb-5"><b>Your API credentials will not be saved and are only transmitted to the EmlaLock API. Everything runs locally on your computer/tablet/smartphone.</b> If you want, check the source code of this app: <a href="https://github.com/l0g-0ut/elg">github.com/l0g-0ut/elg</a>.</div>
-  <button type="button" class="btn btn-lg btn-primary" (click)="callback.emit(true)">Confirm</button>
+  <button type="submit" class="btn btn-lg btn-primary">Confirm</button>
   <p class="mt-4"><small class="text-muted">This service is not affiliated with EmlaLock!</small></p>
 </form>

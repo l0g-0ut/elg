@@ -17,6 +17,9 @@ export class TimeinputComponent implements OnChanges {
   @Input()  model!: number;
   @Output() modelChange = new EventEmitter<number>();
 
+  @Input() fieldError!: string | null;
+  @Input() enabled!: boolean;
+
   formModelOptions = {
     standalone: true,
   };

@@ -63,7 +63,7 @@ export class Step3Component implements OnInit, AfterViewInit {
       this.emlalockService.addRequirements(requirements, this.apiData).subscribe((value) => {
         // fine!
       }, (error) => {
-        this.error = true;
+        // don't worry
       });
     }, (error) => {
       this.error = true;

@@ -1,0 +1,73 @@
+<h3>Someone made a settings profile for you. Will you dare to execute it?</h3>
+
+<div class="card">
+  <h5 class="card-header">{{userDefinedLink.profileName}}</h5>
+  <div class="card-body">
+    <div *ngIf="!userDefinedLink.settingsShown" class="alert alert-warning" role="alert">
+      The author of this profile decided not th show you what you are about to execute. Be very careful! Only execute this profile when you trust the person that gave you this link!
+    </div>
+    <table *ngIf="userDefinedLink.settingsShown" class="table table-sm table-striped">
+      <tbody>
+      <tr>
+        <th>Number of Iterations:</th>
+        <td *ngIf="userDefinedLink.settings.iterations.fix !== null">
+          {{userDefinedLink.settings.iterations.fix}}
+        </td>
+        <td *ngIf="userDefinedLink.settings.iterations.fix === null">
+          <b>RANDOM</b> between {{ userDefinedLink.settings.iterations.min }} and {{ userDefinedLink.settings.iterations.max }}
+        </td>
+      </tr>
+      <tr>
+        <th class="pt-3">For every Iteration:</th>
+        <td class="pt-3">
+          <table class="table table-sm table-striped">
+            <tbody>
+            <tr>
+              <th>Sleep time before Iteration:</th>
+              <td>
+                <b>RANDOM</b> between <i>{{ userDefinedLink.settings.sleeps.min|secTransform }}</i> and <i>{{ userDefinedLink.settings.sleeps.max|secTransform }}</i>
+              </td>
+            </tr>
+            <tr>
+              <th>Time to be added:</th>
+              <td *ngIf="userDefinedLink.settings.penalty.time.enabled === true">
+                <b>RANDOM</b> between <i>{{ userDefinedLink.settings.penalty.time.min|secTransform }}</i> and <i>{{ userDefinedLink.settings.penalty.time.max|secTransform }}</i>
+              </td>
+              <td *ngIf="userDefinedLink.settings.penalty.time.enabled !== true">
+                No time will be added
+              </td>
+            </tr>
+            <tr>
+              <th>Required link clicks to be added:</th>
+              <td *ngIf="userDefinedLink.settings.penalty.requirements.enabled === true">
+                <b>RANDOM</b> between <i>{{ userDefinedLink.settings.penalty.requirements.min }}</i> and <i>{{ userDefinedLink.settings.penalty.requirements.max }}</i>
+              </td>
+              <td *ngIf="userDefinedLink.settings.penalty.requirements.enabled !== true">
+                No required click will be added
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<h4 class="mt-4">Are you ready? Do you really dare?</h4>
+<strong>Then enter your API data now!</strong>
+<p>Keep in mind: It is not a good idea to enter your API data into an application you don't trust.</p>
+<div class="alert alert-info"><fa-icon [icon]="faInfo" [fixedWidth]="true"></fa-icon> You can find your credentils under <b><a href="https://www.emlalock.com/#/settings">Settings</a></b> in the tab <b>API</b>!</div>
+<form (submit)="submit()">
+  <div class="mb-1">
+    <label for="apiUserID" [ngClass]="{'form-label': true, 'text-danger': apiUserValidated === false}">User ID</label>
+    <input (change)="validateUser()" (keyup)="validateUser()" [ngClass]="{'form-control': true, 'is-valid': apiUserValidated === true, 'is-invalid': apiUserValidated === false}" [pattern]="userPattern" type="text" id="apiUserID" [(ngModel)]="apiData.apiUser" [ngModelOptions]="{standalone: true}">
+  </div>
+  <div class="mb-1">
+    <label for="apiKey" [ngClass]="{'form-label': true, 'text-danger': apiKeyValidated === false}">API Key</label>
+    <input (change)="validateKey()" (keyup)="validateKey()" [ngClass]="{'form-control': true, 'is-valid': apiKeyValidated === true, 'is-invalid': apiKeyValidated === false}" [pattern]="keyPattern" type="text" id="apiKey" [(ngModel)]="apiData.apiKey" [ngModelOptions]="{standalone: true}">
+  </div>
+  <div class="alert alert-warning mt-5 mb-5"><b>Your API credentials will not be saved and are only transmitted to the EmlaLock API. Everything runs locally on your computer/tablet/smartphone.</b> If you want, check the source code of this app: <a href="https://github.com/l0g-0ut/elg">github.com/l0g-0ut/elg</a>.</div>
+  <button type="submit" class="btn btn-lg btn-primary">Execute this profile immediately!</button>
+  <p class="mt-4"><small class="text-muted">This service is not affiliated with EmlaLock!</small></p>
+</form>

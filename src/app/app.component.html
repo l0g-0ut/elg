@@ -4,7 +4,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="?"><fa-icon [fixedWidth]="true" [icon]="faReload"></fa-icon>Restart</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="?p="><fa-icon [fixedWidth]="true" [icon]="faReload"></fa-icon>Restart</a></li>
       </ul>
     </div>
   </div>
@@ -18,6 +18,7 @@
       <step2 *ngIf="currentStep == 2" (callback)="onConfirm($event)"></step2>
       <step3 *ngIf="currentStep == 3" [apiData]="apiData" [profileData]="profileData"></step3>
       <builder *ngIf="currentStep == -1"></builder>
+      <custom *ngIf="userDefinedProfile !== null && this.currentStep == -2" [userDefinedLink]="userDefinedProfile" [apiData]="apiData" (callback)="onConfirm($event)"></custom>
     </div>
     <div class="card-footer">
       <small><span class="text-warning"><fa-icon [fixedWidth]="true" [icon]="faWarning"></fa-icon></span> You need an EmlaLock account and a running session to use this app!</small>

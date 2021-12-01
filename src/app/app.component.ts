@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ApiData} from "./model/api-data";
 import {ProfileData} from "./services/profile.service";
 import {faExclamationTriangle, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
+import {ActivatedRoute} from "@angular/router";
+import {UserDefinedLink} from "./model/udl";
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ export class AppComponent implements OnInit {
   public currentStep = 1;
 
   public title: string = 'Welcome, stranger!';
+
+  userDefinedProfile: UserDefinedLink | null = null;
 
   private step1Confirm() {
     if (this.apiData.apiKey != '' && this.apiData.apiUser != '') {
@@ -43,6 +47,9 @@ export class AppComponent implements OnInit {
       return;
     }
     switch (this.currentStep) {
+      case -2:
+        this.step2Confirm(confirm as ProfileData);
+        break;
       case 1:
         this.step1Confirm();
         break;
@@ -52,11 +59,25 @@ export class AppComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute) {
+    this.apiData = new ApiData('', '');
   }
 
-  constructor() {
-    this.apiData = new ApiData('', '')
+  handlePredefinedProfile(rawProfileData: string) {
+    const udd = new UserDefinedLink();
+    Object.assign(udd, JSON.parse(atob(rawProfileData)));
+    this.userDefinedProfile = udd;
+    this.currentStep = -2;
+    this.title = 'Lucky you!';
+  }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      const predefinedProfile = params['p'];
+      if (predefinedProfile) {
+        this.handlePredefinedProfile(predefinedProfile);
+      }
+    });
   }
 
 }

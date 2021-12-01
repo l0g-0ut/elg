@@ -13,6 +13,8 @@ import {BuilderComponent} from "./steps/builder/builder.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {TimeinputComponent} from "./components/timeinput/timeinput.component";
+import {RouterModule} from "@angular/router";
+import {CustomComponent} from "./steps/custom/custom.component";
 
 @NgModule({
   declarations: [
@@ -21,10 +23,12 @@ import {TimeinputComponent} from "./components/timeinput/timeinput.component";
     Step2Component,
     Step3Component,
     BuilderComponent,
+    CustomComponent,
     SecTransformPipe,
     TimeinputComponent,
   ],
   imports: [
+    RouterModule.forRoot([]),
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
