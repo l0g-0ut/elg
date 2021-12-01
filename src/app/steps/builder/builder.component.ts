@@ -38,6 +38,8 @@ export class BuilderComponent {
     reqMax: <string | null> null,
   };
 
+  validationFailed = false;
+
   changeFixedIter(event: any) {
     if (event?.target?.checked === true) {
       this.fixedIterState = true;
@@ -196,9 +198,12 @@ export class BuilderComponent {
   }
 
   buildLink() {
+    this.generatedLink = null;
     if (!this.validate()) {
+      this.validationFailed = true;
       return;
     }
+    this.validationFailed = false;
     const linkData = btoa(JSON.stringify(this.profileData));
     let link = this.platformLocation.protocol;
     if (!link.endsWith(':')) {

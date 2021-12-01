@@ -4,7 +4,7 @@ export class UserDefinedLink {
 
   constructor(
     public settingsShown: boolean = true,
-    public profileName: string = 'unnamed profile',
+    public profileName: string = '',
     public settings: ProfileData = {
       iterations: {
         fix: null,

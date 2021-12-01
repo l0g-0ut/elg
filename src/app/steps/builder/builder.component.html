@@ -16,7 +16,7 @@
   <fieldset class="border-bottom mb-3 pb-3">
     <legend>Iterations</legend>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <div class="form-check form-check-inline">
           <input #fixedIterEnabled [ngClass]="{'form-check-input': true, 'is-invalid': errors.enableFixIterations !== null}" type="checkbox" id="enFixedIter" (change)="changeFixedIter($event)">
           <label [ngClass]="{'form-check-label': true, 'text-danger': errors.enableFixIterations !== null}" for="enFixedIter">Enable fixed iterations</label>
@@ -29,7 +29,7 @@
           <small id="iterHelp" class="form-text text-muted">If you set a number of fixed iterations, the random generator for iterations gets disabled.</small>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <strong>Random</strong>
         <div class="form-group">
           <label [ngClass]="{'form-label': true, 'text-danger': errors.iterMin !== null}" for="minIter">Minimum number of iterations</label>
@@ -43,16 +43,16 @@
         </div>
       </div>
     </div>
-    <h6 class="mt-2">Sleep Time before iterations</h6>
+    <h6 class="mt-4 mt-sm-2">Sleep Time before iterations</h6>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <div class="form-group">
           <label [ngClass]="{'form-label': true, 'text-danger': errors.sleepMin !== null}" for="minSleep">Minimum number of seconds to sleep</label>
           <input [ngClass]="{'form-control': true, 'is-invalid': errors.sleepMin !== null}" [(ngModel)]="profileData.settings.sleeps.min" [ngModelOptions]="formModelOptions" type="number" min="1" id="minSleep">
           <div *ngIf="errors.sleepMin !== null" class="invalid-feedback">{{errors.sleepMin}}</div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <div class="form-group">
           <label [ngClass]="{'form-label': true, 'text-danger': errors.sleepMax !== null}" for="maxSleep">Maximum number of seconds to sleep</label>
           <input [ngClass]="{'form-control': true, 'is-invalid': errors.sleepMax !== null}" [(ngModel)]="profileData.settings.sleeps.max" [ngModelOptions]="formModelOptions" type="number" min="5" id="maxSleep">
@@ -69,26 +69,26 @@
       <label class="form-check-label" for="penTimeEn">Enabled</label>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 pt-3 pt-md-0">
         <time [enabled]="profileData.settings.penalty.time.enabled" [fieldError]="errors.timeMin" label="Minimum time to be added" [(model)]="profileData.settings.penalty.time.min"></time>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 pt-3 pt-md-0">
         <time [enabled]="profileData.settings.penalty.time.enabled" [fieldError]="errors.timeMax" label="Maximum time to be added" [(model)]="profileData.settings.penalty.time.max"></time>
       </div>
     </div>
-    <h6 class="mt-3">Adding requirements</h6>
+    <h6 class="mt-4 mt-sm-3">Adding requirements</h6>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" id="penReqEn" [(ngModel)]="profileData.settings.penalty.requirements.enabled" [ngModelOptions]="formModelOptions">
       <label class="form-check-label" for="penReqEn">Enabled</label>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <div class="form-group">
           <label for="minReq">Minimum number of requirements to be added</label>
           <input [disabled]="!profileData.settings.penalty.requirements.enabled" [(ngModel)]="profileData.settings.penalty.requirements.min" [ngModelOptions]="formModelOptions" type="number" min="0" class="form-control" id="minReq">
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <div class="form-group">
           <label for="maxReq">Maximum number of requirements to be added</label>
           <input [disabled]="!profileData.settings.penalty.requirements.enabled" [(ngModel)]="profileData.settings.penalty.requirements.max" [ngModelOptions]="formModelOptions" type="number" min="1" class="form-control" id="maxReq">
@@ -97,12 +97,14 @@
     </div>
   </fieldset>
   <button class="btn btn-primary btn-lg" type="submit"><fa-icon [icon]="faBuild" [fixedWidth]="true"></fa-icon> Build Link</button>
+  <small *ngIf="validationFailed" class="text-danger ml-2 d-inline-block">Unable to create link. Please check your inputs.</small>
 </form>
 <div *ngIf="generatedLink !== null" class="card mt-3 bg-success text-white">
   <h4 class="card-header"><fa-icon [fixedWidth]="true" [icon]="faReady"></fa-icon> Your link is ready!</h4>
   <div class="card-body">
     <p class="card-text">Copy and use the following link to let someone execute your profile:</p>
-    <strong><a class="text-white" href="{{generatedLink}}">{{generatedLink}}</a></strong>
+    <pre class="d-block btn-light p-2 text-dark border border-1 text-wrap"><strong class="card-text"><a class="card-text" href="{{generatedLink}}">{{generatedLink}}</a></strong></pre>
+    <p class="card-text"><small>You might want to use an URL shortener to get a shorter link.</small></p>
   </div>
   <div class="card-footer">
     <small>Not exactly what you wanted? Just change your settings and hit the Build button again!</small>

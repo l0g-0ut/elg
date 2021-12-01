@@ -1,24 +1,24 @@
 <label [ngClass]="{'form-label': true, 'text-danger': fieldError !== null}">{{label}}</label>
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-3">
     <div class="form-group">
       <label [ngClass]="{'form-label': true, 'text-danger': fieldError !== null}" for="week">Weeks</label>
       <input [disabled]="!enabled" [ngClass]="{'form-control': true, 'is-invalid': fieldError !== null}" (change)="valueChanged()" (keyup)="valueChanged()" [(ngModel)]="weeks" [ngModelOptions]="formModelOptions" type="number" min="0" id="week">
     </div>
   </div>
-  <div class="col-sm-3">
+  <div class="col-3">
     <div class="form-group">
       <label [ngClass]="{'form-label': true, 'text-danger': fieldError !== null}" for="day">Days</label>
       <input [disabled]="!enabled" [ngClass]="{'form-control': true, 'is-invalid': fieldError !== null}" (change)="valueChanged()" (keyup)="valueChanged()" [(ngModel)]="days" [ngModelOptions]="formModelOptions" type="number" min="0" id="day">
     </div>
   </div>
-  <div class="col-sm-3">
+  <div class="col-3">
     <div class="form-group">
       <label [ngClass]="{'form-label': true, 'text-danger': fieldError !== null}" for="hour">Hours</label>
       <input [disabled]="!enabled" [ngClass]="{'form-control': true, 'is-invalid': fieldError !== null}" (change)="valueChanged()" (keyup)="valueChanged()" [(ngModel)]="hours" [ngModelOptions]="formModelOptions" type="number" min="0" id="hour">
     </div>
   </div>
-  <div class="col-sm-3">
+  <div class="col-3">
     <div class="form-group">
       <label [ngClass]="{'form-label': true, 'text-danger': fieldError !== null}" for="minute">Minutes</label>
       <input [disabled]="!enabled" [ngClass]="{'form-control': true, 'is-invalid': fieldError !== null}" (change)="valueChanged()" (keyup)="valueChanged()" [(ngModel)]="minutes" [ngModelOptions]="formModelOptions" type="number" min="0" id="minute">
