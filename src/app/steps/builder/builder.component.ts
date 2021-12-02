@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
 import {UserDefinedLink} from "../../model/udl";
-import {faCheckSquare, faLink} from "@fortawesome/free-solid-svg-icons";
+import {faCheckSquare, faExternalLinkAlt, faLink} from "@fortawesome/free-solid-svg-icons";
 import {PlatformLocation} from "@angular/common";
+import {UrlShortenerService} from "../../services/urlshortener.service";
 
 @Component({
   selector: 'builder',
@@ -12,8 +13,13 @@ export class BuilderComponent {
 
   faBuild = faLink;
   faReady = faCheckSquare;
+  faShorten = faExternalLinkAlt;
 
   generatedLink: string | null = null;
+  shortenedUrl: string | null = null;
+  shortenerError: string | null = null;
+
+  shortenerAvailable = true;
 
   formModelOptions = {
     standalone: true,
@@ -198,7 +204,9 @@ export class BuilderComponent {
   }
 
   buildLink() {
+    this.shortenedUrl = null;
     this.generatedLink = null;
+    this.shortenerAvailable = true;
     if (!this.validate()) {
       this.validationFailed = true;
       return;
@@ -221,6 +229,35 @@ export class BuilderComponent {
     this.generatedLink = link;
   }
 
-  constructor(private platformLocation: PlatformLocation) {}
+  shortenUrl() {
+    this.shortenerAvailable = false;
+    if (this.generatedLink === null) {
+      return;
+    }
+    this.shortenedUrl = null;
+    this.shortenerError = null;
+    this.urlShortener.buildShortUrl(this.generatedLink).subscribe((result) => {
+      if (result.error_code) {
+        this.shortenerError = 'An error happened while shortening your link; error code: ' + result.error_code;
+        this.shortenerAvailable = true;
+      }
+      else if (!result.ok) {
+        this.shortenerError = 'An error happened while shortening your link.';
+        this.shortenerAvailable = true;
+      }
+      else if (result.result?.full_short_link) {
+        this.shortenedUrl = result.result?.full_short_link;
+      }
+      else {
+        this.shortenerError = 'An unknown error occurred while trying to shorten your link.';
+        this.shortenerAvailable = true;
+      }
+    }, (error) => {
+      this.shortenerError = 'Unable to create a shortened URL at the moment, sorry :-(';
+      this.shortenerAvailable = true;
+    });
+  }
+
+  constructor(private platformLocation: PlatformLocation, private urlShortener: UrlShortenerService) {}
 
 }

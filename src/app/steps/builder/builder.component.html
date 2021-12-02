@@ -104,7 +104,11 @@
   <div class="card-body">
     <p class="card-text">Copy and use the following link to let someone execute your profile:</p>
     <pre class="d-block btn-light p-2 text-dark border border-1 text-wrap"><strong class="card-text"><a class="card-text" href="{{generatedLink}}">{{generatedLink}}</a></strong></pre>
-    <p class="card-text"><small>You might want to use an URL shortener to get a shorter link.</small></p>
+    <button [disabled]="!shortenerAvailable" class="btn btn-secondary mt-1" (click)="shortenUrl()"><fa-icon [icon]="faShorten" [fixedWidth]="true"></fa-icon> Shorten URL</button>
+    <small class="card-text d-inline-block p-2">Be patient, this might take a little while!</small>
+    <p class="card-text mt-3" *ngIf="shortenedUrl !== null">Here is your shortened link:</p>
+    <pre *ngIf="shortenedUrl !== null" class="d-block btn-light p-2 text-dark border border-1 text-wrap"><strong class="card-text"><a class="card-text" href="{{shortenedUrl}}">{{shortenedUrl}}</a></strong></pre>
+    <div class="alert alert-danger mt-3" *ngIf="shortenerError !== null" role="alert">{{shortenerError}}</div>
   </div>
   <div class="card-footer">
     <small>Not exactly what you wanted? Just change your settings and hit the Build button again!</small>
