@@ -4,6 +4,7 @@ import {ProfileData} from "./services/profile.service";
 import {faExclamationTriangle, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
 import {ActivatedRoute} from "@angular/router";
 import {UserDefinedLink} from "./model/udl";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ import {UserDefinedLink} from "./model/udl";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  version = environment.version;
 
   isMenuCollapsed = true;
 

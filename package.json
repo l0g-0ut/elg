@@ -6,6 +6,7 @@
     "start": "ng serve",
     "uat": "ng serve --host 0.0.0.0 --disable-host-check",
     "build": "ng build",
+    "release": "npm version patch && ng build --base-href /elg/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
