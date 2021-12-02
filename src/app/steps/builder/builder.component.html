@@ -97,7 +97,7 @@
     </div>
   </fieldset>
   <button class="btn btn-primary btn-lg" type="submit"><fa-icon [icon]="faBuild" [fixedWidth]="true"></fa-icon> Build Link</button>
-  <small *ngIf="validationFailed" class="text-danger ml-2 d-inline-block">Unable to create link. Please check your inputs.</small>
+  <small *ngIf="validationFailed" class="text-danger d-inline-block p-2">Unable to create link. Please check the marked input fields.</small>
 </form>
 <div *ngIf="generatedLink !== null" class="card mt-3 bg-success text-white">
   <h4 class="card-header"><fa-icon [fixedWidth]="true" [icon]="faReady"></fa-icon> Your link is ready!</h4>
