@@ -21,6 +21,19 @@ export class EmlalockService {
     });
   }
 
+  public addMaximumTime(seconds: number, apiData: ApiData): Observable<any> {
+    return this.http.get<any>('https://api.emlalock.com/addmaximum', {
+      headers: {
+        'Accept': 'application/json',
+      },
+      params: {
+        'userid': apiData.apiUser,
+        'apikey': apiData.apiKey,
+        'value': seconds,
+      }
+    });
+  }
+
   public addRequirements(num: number, apiData: ApiData): Observable<any> {
     return this.http.get<any>('https://api.emlalock.com/addrequirement', {
       headers: {

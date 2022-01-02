@@ -1,0 +1,9 @@
+<ng-container *ngIf="value === true">
+  <div class="alert alert-danger m-0 p-1" role="alert">
+    <fa-icon [fixedWidth]="true" [icon]="faDisrespect" class="text-danger"></fa-icon> <strong>Your Maximum Time Limit will be overridden and extended! Be very careful!</strong>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="value !== true && showWhenRespecting !== false">
+  <fa-icon [fixedWidth]="true" [icon]="faRespect" class="text-success"></fa-icon> Your Maximum Time Limit will be respected and not exceeded.
+</ng-container>

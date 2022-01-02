@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {UserDefinedLink} from "../../model/udl";
-import {faCheckSquare, faExternalLinkAlt, faLink} from "@fortawesome/free-solid-svg-icons";
+import {faCheckSquare, faExclamationTriangle, faExternalLinkAlt, faLink} from "@fortawesome/free-solid-svg-icons";
 import {PlatformLocation} from "@angular/common";
 import {UrlShortenerService} from "../../services/urlshortener.service";
 
@@ -14,6 +14,7 @@ export class BuilderComponent {
   faBuild = faLink;
   faReady = faCheckSquare;
   faShorten = faExternalLinkAlt;
+  faLimit = faExclamationTriangle;
 
   generatedLink: string | null = null;
   shortenedUrl: string | null = null;

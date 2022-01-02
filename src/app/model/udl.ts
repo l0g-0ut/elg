@@ -28,8 +28,8 @@ export class UserDefinedLink {
         max: 60,
       },
       inFeelingLucy: false,
+      overrideMaximumTime: false,
     }
   ) {}
-
 
 }

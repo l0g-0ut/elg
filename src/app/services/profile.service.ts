@@ -26,6 +26,7 @@ export interface ProfileData {
   iterations: MinMaxFix;
   sleeps: MinMax;
   penalty: PenaltyData;
+  overrideMaximumTime?: boolean;
 }
 
 export interface ProfileResponse {

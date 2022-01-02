@@ -6,50 +6,57 @@
     <div *ngIf="!userDefinedLink.settingsShown" class="alert alert-warning" role="alert">
       The author of this profile decided not th show you what you are about to execute. Be very careful! Only execute this profile when you trust the person that gave you this link!
     </div>
+    <override-maximum *ngIf="!userDefinedLink.settingsShown" [value]="userDefinedLink.settings.overrideMaximumTime" [showWhenRespecting]="false"></override-maximum>
     <table *ngIf="userDefinedLink.settingsShown" class="table table-sm table-striped">
       <tbody>
-      <tr>
-        <th>Number of Iterations:</th>
-        <td *ngIf="userDefinedLink.settings.iterations.fix !== null">
-          {{userDefinedLink.settings.iterations.fix}}
-        </td>
-        <td *ngIf="userDefinedLink.settings.iterations.fix === null">
-          <b>RANDOM</b> between {{ userDefinedLink.settings.iterations.min }} and {{ userDefinedLink.settings.iterations.max }}
-        </td>
-      </tr>
-      <tr>
-        <th class="pt-3">For every Iteration:</th>
-        <td class="pt-3">
-          <table class="table table-sm table-striped">
-            <tbody>
-            <tr>
-              <th>Sleep time before Iteration:</th>
-              <td>
-                <b>RANDOM</b> between <i>{{ userDefinedLink.settings.sleeps.min|secTransform }}</i> and <i>{{ userDefinedLink.settings.sleeps.max|secTransform }}</i>
-              </td>
-            </tr>
-            <tr>
-              <th>Time to be added:</th>
-              <td *ngIf="userDefinedLink.settings.penalty.time.enabled === true">
-                <b>RANDOM</b> between <i>{{ userDefinedLink.settings.penalty.time.min|secTransform }}</i> and <i>{{ userDefinedLink.settings.penalty.time.max|secTransform }}</i>
-              </td>
-              <td *ngIf="userDefinedLink.settings.penalty.time.enabled !== true">
-                No time will be added
-              </td>
-            </tr>
-            <tr>
-              <th>Required link clicks to be added:</th>
-              <td *ngIf="userDefinedLink.settings.penalty.requirements.enabled === true">
-                <b>RANDOM</b> between <i>{{ userDefinedLink.settings.penalty.requirements.min }}</i> and <i>{{ userDefinedLink.settings.penalty.requirements.max }}</i>
-              </td>
-              <td *ngIf="userDefinedLink.settings.penalty.requirements.enabled !== true">
-                No required click will be added
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
+        <tr>
+          <th>Number of Iterations:</th>
+          <td *ngIf="userDefinedLink.settings.iterations.fix !== null">
+            {{userDefinedLink.settings.iterations.fix}}
+          </td>
+          <td *ngIf="userDefinedLink.settings.iterations.fix === null">
+            <b>RANDOM</b> between {{ userDefinedLink.settings.iterations.min }} and {{ userDefinedLink.settings.iterations.max }}
+          </td>
+        </tr>
+        <tr>
+          <th class="pt-3">For each Iteration:</th>
+          <td class="pt-3">
+            <table class="table table-sm table-striped">
+              <tbody>
+              <tr>
+                <th>Sleep time before Iteration:</th>
+                <td>
+                  <b>RANDOM</b> between <i>{{ userDefinedLink.settings.sleeps.min|secTransform }}</i> and <i>{{ userDefinedLink.settings.sleeps.max|secTransform }}</i>
+                </td>
+              </tr>
+              <tr>
+                <th>Time to be added:</th>
+                <td *ngIf="userDefinedLink.settings.penalty.time.enabled === true">
+                  <b>RANDOM</b> between <i>{{ userDefinedLink.settings.penalty.time.min|secTransform }}</i> and <i>{{ userDefinedLink.settings.penalty.time.max|secTransform }}</i>
+                </td>
+                <td *ngIf="userDefinedLink.settings.penalty.time.enabled !== true">
+                  No time will be added
+                </td>
+              </tr>
+              <tr>
+                <th>Required link clicks to be added:</th>
+                <td *ngIf="userDefinedLink.settings.penalty.requirements.enabled === true">
+                  <b>RANDOM</b> between <i>{{ userDefinedLink.settings.penalty.requirements.min }}</i> and <i>{{ userDefinedLink.settings.penalty.requirements.max }}</i>
+                </td>
+                <td *ngIf="userDefinedLink.settings.penalty.requirements.enabled !== true">
+                  No required click will be added
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <th>Regarding your Maximum Time:</th>
+          <td>
+            <override-maximum [value]="userDefinedLink.settings.overrideMaximumTime"></override-maximum>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

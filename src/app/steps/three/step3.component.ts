@@ -32,6 +32,18 @@ export class Step3Component implements OnInit, AfterViewInit {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+  private addTimeAndRequirements(seconds: number, requirements: number): void {
+    this.emlalockService.addTime(seconds, this.apiData).subscribe((value) => {
+      this.emlalockService.addRequirements(requirements, this.apiData).subscribe((value) => {
+        // fine!
+      }, (error) => {
+        // don't worry
+      });
+    }, (error) => {
+      this.error = true;
+    });
+  }
+
   ngOnInit(): void {
     if (this.profileData === null) {
       return;
@@ -59,15 +71,18 @@ export class Step3Component implements OnInit, AfterViewInit {
         iteration: iteration,
       });
     }
-    this.emlalockService.addTime(seconds, this.apiData).subscribe((value) => {
-      this.emlalockService.addRequirements(requirements, this.apiData).subscribe((value) => {
-        // fine!
+    if (this.profileData.overrideMaximumTime === true) {
+      this.emlalockService.addMaximumTime(seconds, this.apiData).subscribe(() => {
+        setTimeout(() => {
+          this.addTimeAndRequirements(seconds, requirements);
+        }, 1000);
       }, (error) => {
-        // don't worry
+        this.error = true;
       });
-    }, (error) => {
-      this.error = true;
-    });
+    }
+    else {
+      this.addTimeAndRequirements(seconds, requirements);
+    }
   }
 
   nextSlide() {

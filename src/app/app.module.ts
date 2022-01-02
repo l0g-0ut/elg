@@ -15,6 +15,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {TimeinputComponent} from "./components/timeinput/timeinput.component";
 import {RouterModule} from "@angular/router";
 import {CustomComponent} from "./steps/custom/custom.component";
+import {OverrideMaximumComponent} from "./components/override-maximum/override-maximum.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {CustomComponent} from "./steps/custom/custom.component";
     CustomComponent,
     SecTransformPipe,
     TimeinputComponent,
+    OverrideMaximumComponent,
   ],
   imports: [
     RouterModule.forRoot([]),
