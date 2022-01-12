@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ApiData} from "./model/api-data";
 import {ProfileData} from "./services/profile.service";
-import {faExclamationTriangle, faSyncAlt} from "@fortawesome/free-solid-svg-icons";
+import {faExclamationTriangle, faSyncAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {ActivatedRoute} from "@angular/router";
 import {UserDefinedLink} from "./model/udl";
 import {environment} from "../environments/environment";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
 
   faReload = faSyncAlt;
   faWarning = faExclamationTriangle;
+  faClose = faTimes;
 
   public apiData: ApiData;
   public profileData: ProfileData | null = null;
@@ -28,6 +30,12 @@ export class AppComponent implements OnInit {
 
   userDefinedProfile: UserDefinedLink | null = null;
 
+  confirmedOverride: boolean = false;
+  maxTimeToConfirm: number = 0;
+  confirmationText: string = 'I understand';
+  confirmationInput: string = '';
+  @ViewChild("overrideWarning") overrideWarning!: any;
+
   private step1Confirm() {
     if (this.apiData.apiKey != '' && this.apiData.apiUser != '') {
       this.currentStep = 2;
@@ -36,6 +44,31 @@ export class AppComponent implements OnInit {
   }
 
   private step2Confirm(profileData: ProfileData) {
+    if (profileData?.overrideMaximumTime === true && !this.confirmedOverride) {
+      this.maxTimeToConfirm = 0;
+      if (profileData.penalty.time.enabled) {
+        let iterations;
+        if (profileData.iterations.fix) {
+          iterations = profileData.iterations.fix;
+        }
+        else {
+          iterations = profileData.iterations.max;
+        }
+        this.maxTimeToConfirm = iterations * profileData.penalty.time.max;
+      }
+      this.confirmationInput = '';
+      this.modalService.open(this.overrideWarning, {
+        size: "xl",
+        centered: true,
+        scrollable: true,
+      }).result.then((confirmed) => {
+        this.confirmedOverride = true;
+        this.step2Confirm(profileData);
+      }, (dismissed) => {
+        this.confirmedOverride = false;
+      });
+      return;
+    }
     this.profileData = profileData;
     this.currentStep = 3;
     this.title = 'Let\'s see how lucky you are';
@@ -64,7 +97,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private modalService: NgbModal) {
     this.apiData = new ApiData('', '');
   }
 
