@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {Step1Component} from "./steps/one/step1.component";
 import {Step2Component} from "./steps/two/step2.component";
 import {FormsModule} from "@angular/forms";
@@ -32,7 +31,6 @@ import {OverrideMaximumComponent} from "./components/override-maximum/override-m
   imports: [
     RouterModule.forRoot([]),
     BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     NgbModule,
