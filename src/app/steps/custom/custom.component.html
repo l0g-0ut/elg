@@ -4,7 +4,7 @@
   <h5 class="card-header">{{userDefinedLink.profileName}}</h5>
   <div class="card-body">
     <div *ngIf="!userDefinedLink.settingsShown" class="alert alert-warning" role="alert">
-      The author of this profile decided not th show you what you are about to execute. Be very careful! Only execute this profile when you trust the person that gave you this link!
+      The author of this profile decided not to show you what you are about to execute. Be very careful! Only execute this profile when you trust the person that gave you this link!
     </div>
     <override-maximum *ngIf="!userDefinedLink.settingsShown" [value]="userDefinedLink.settings.overrideMaximumTime" [showWhenRespecting]="false"></override-maximum>
     <table *ngIf="userDefinedLink.settingsShown" class="table table-sm table-striped">

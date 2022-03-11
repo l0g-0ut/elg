@@ -32,16 +32,27 @@ export class Step3Component implements OnInit, AfterViewInit {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  private addTimeAndRequirements(seconds: number, requirements: number): void {
-    this.emlalockService.addTime(seconds, this.apiData).subscribe((value) => {
+  private addRequirements(requirements: number): void {
+    if (requirements > 0) {
       this.emlalockService.addRequirements(requirements, this.apiData).subscribe((value) => {
         // fine!
       }, (error) => {
         // don't worry
       });
-    }, (error) => {
-      this.error = true;
-    });
+    }
+  }
+
+  private addTimeAndRequirements(seconds: number, requirements: number): void {
+    if (seconds > 0) {
+      this.emlalockService.addTime(seconds, this.apiData).subscribe((value) => {
+        this.addRequirements(requirements);
+      }, (error) => {
+        this.error = true;
+      });
+    }
+    else {
+      this.addRequirements(requirements);
+    }
   }
 
   ngOnInit(): void {
@@ -71,7 +82,7 @@ export class Step3Component implements OnInit, AfterViewInit {
         iteration: iteration,
       });
     }
-    if (this.profileData.overrideMaximumTime === true) {
+    if ((this.profileData.overrideMaximumTime === true) && (seconds > 0)) {
       this.emlalockService.addMaximumTime(seconds, this.apiData).subscribe(() => {
         setTimeout(() => {
           this.addTimeAndRequirements(seconds, requirements);
