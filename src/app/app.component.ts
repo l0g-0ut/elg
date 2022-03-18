@@ -134,9 +134,8 @@ export class AppComponent implements OnInit {
   }
 
   handlePredefinedProfile(rawProfileData: string) {
-    const udd = new UserDefinedLink();
-    Object.assign(udd, JSON.parse(atob(rawProfileData)));
-    this.userDefinedProfile = udd;
+    const profileData = JSON.parse(atob(rawProfileData));
+    this.userDefinedProfile = UserDefinedLink.factory(profileData);
     this.currentStep = -2;
     this.title = 'Lucky you!';
   }

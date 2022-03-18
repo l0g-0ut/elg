@@ -1,4 +1,6 @@
 import {ProfileData} from "../services/profile.service";
+import * as _ from 'lodash';
+
 
 export class UserDefinedLink {
 
@@ -36,5 +38,10 @@ export class UserDefinedLink {
       overrideMaximumTime: false,
     }
   ) {}
+
+  public static factory(pro: Partial<UserDefinedLink>): UserDefinedLink {
+    const obj = _.merge(new UserDefinedLink(), pro);
+    return <UserDefinedLink>obj;
+  }
 
 }
