@@ -67,7 +67,7 @@
   </fieldset>
   <fieldset class="border-bottom mb-3 pb-3">
     <legend>Penalties (per iteration)</legend>
-    <h6 class="mt-2">Adding time</h6>
+    <h6 class="mt-4">Adding time to Duration</h6>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" id="penTimeEn" [(ngModel)]="profileData.settings.penalty.time.enabled" [ngModelOptions]="formModelOptions">
       <label class="form-check-label" for="penTimeEn">Enabled</label>
@@ -78,6 +78,19 @@
       </div>
       <div class="col-md-6 pt-3 pt-md-0">
         <time [enabled]="profileData.settings.penalty.time.enabled" [fieldError]="errors.timeMax" label="Maximum time to be added" [(model)]="profileData.settings.penalty.time.max"></time>
+      </div>
+    </div>
+    <h6 class="mt-4">Adding time to Minimum Time</h6>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="penTimeMinEn" [(ngModel)]="profileData.settings.penalty.minimumTime.enabled" [ngModelOptions]="formModelOptions">
+      <label class="form-check-label" for="penTimeMinEn">Enabled</label>
+    </div>
+    <div class="row">
+      <div class="col-md-6 pt-3 pt-md-0">
+        <time [enabled]="profileData.settings.penalty.minimumTime.enabled" [fieldError]="errors.minTimeMin" label="Minimum time to be added" [(model)]="profileData.settings.penalty.minimumTime.min"></time>
+      </div>
+      <div class="col-md-6 pt-3 pt-md-0">
+        <time [enabled]="profileData.settings.penalty.minimumTime.enabled" [fieldError]="errors.minTimeMax" label="Maximum time to be added" [(model)]="profileData.settings.penalty.minimumTime.max"></time>
       </div>
     </div>
     <h6 class="mt-4 mt-sm-3">Adding requirements</h6>

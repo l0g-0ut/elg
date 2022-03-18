@@ -30,11 +30,20 @@
                       </td>
                     </tr>
                     <tr>
-                      <th>Time to be added:</th>
+                      <th>Time to be added to your Duration:</th>
                       <td *ngIf="profileData[pk].penalty.time.enabled === true">
                         <b>RANDOM</b> between <i>{{ profileData[pk].penalty.time.min|secTransform }}</i> and <i>{{ profileData[pk].penalty.time.max|secTransform }}</i>
                       </td>
                       <td *ngIf="profileData[pk].penalty.time.enabled !== true">
+                        No time will be added
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Time to be added to your Minimum Time:</th>
+                      <td *ngIf="profileData[pk].penalty.minimumTime.enabled === true">
+                        <b>RANDOM</b> between <i>{{ profileData[pk].penalty.minimumTime.min|secTransform }}</i> and <i>{{ profileData[pk].penalty.minimumTime.max|secTransform }}</i>
+                      </td>
+                      <td *ngIf="profileData[pk].penalty.minimumTime.enabled !== true">
                         No time will be added
                       </td>
                     </tr>

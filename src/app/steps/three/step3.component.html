@@ -3,7 +3,8 @@
   <p *ngIf="this.currentIteration === null"><b>We will start in a few seconds...</b></p>
   <div style="border: 1px #333333" *ngIf="this.currentIteration !== null">
     <h1>Iteration #{{currentIteration.iteration}}</h1>
-    <p *ngIf="currentIteration.addingTime">Adding time: <b>{{currentIteration.addingTime|secTransform}}</b></p>
+    <p *ngIf="currentIteration.addingTime">Adding time to Duration: <b>{{currentIteration.addingTime|secTransform}}</b></p>
+    <p *ngIf="currentIteration.addingMinTime">Adding time to Minimum Time: <b>{{currentIteration.addingMinTime|secTransform}}</b></p>
     <p *ngIf="currentIteration.addingReq">Adding required link clicks: <b>{{currentIteration.addingReq}}</b></p>
   </div>
   <h1 *ngIf="currentIteration !== null && currentIteration.iteration >= iterations.length">That's it. Have fun!</h1>

@@ -17,6 +17,11 @@ export class UserDefinedLink {
           min: 60,
           max: 3600,
         },
+        minimumTime: {
+          enabled: false,
+          min: 1,
+          max: 3600,
+        },
         requirements: {
           enabled: true,
           min: 1,

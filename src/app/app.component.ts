@@ -30,11 +30,20 @@ export class AppComponent implements OnInit {
 
   userDefinedProfile: UserDefinedLink | null = null;
 
-  confirmedOverride: boolean = false;
+  confirmedMaxOverride: boolean = false;
+  confirmedMinOverride: boolean = false;
+
   maxTimeToConfirm: number = 0;
-  confirmationText: string = 'I understand';
-  confirmationInput: string = '';
-  @ViewChild("overrideWarning") overrideWarning!: any;
+  minTimeToConfirm: number = 0;
+
+  confirmationMaxText: string = 'I understand';
+  confirmationMaxInput: string = '';
+
+  confirmationMinText: string = 'Got it';
+  confirmationMinInput: string = '';
+
+  @ViewChild("overrideMaxWarning") overrideMaxWarning!: any;
+  @ViewChild("overrideMinWarning") overrideMinWarning!: any;
 
   private step1Confirm() {
     if (this.apiData.apiKey != '' && this.apiData.apiUser != '') {
@@ -44,7 +53,7 @@ export class AppComponent implements OnInit {
   }
 
   private step2Confirm(profileData: ProfileData) {
-    if (profileData?.overrideMaximumTime === true && !this.confirmedOverride) {
+    if (profileData?.overrideMaximumTime === true && !this.confirmedMaxOverride) {
       this.maxTimeToConfirm = 0;
       if (profileData.penalty.time.enabled) {
         let iterations;
@@ -56,16 +65,39 @@ export class AppComponent implements OnInit {
         }
         this.maxTimeToConfirm = iterations * profileData.penalty.time.max;
       }
-      this.confirmationInput = '';
-      this.modalService.open(this.overrideWarning, {
+      this.confirmationMaxInput = '';
+      this.modalService.open(this.overrideMaxWarning, {
         size: "xl",
         centered: true,
         scrollable: true,
       }).result.then((confirmed) => {
-        this.confirmedOverride = true;
+        this.confirmedMaxOverride = true;
         this.step2Confirm(profileData);
       }, (dismissed) => {
-        this.confirmedOverride = false;
+        this.confirmedMaxOverride = false;
+      });
+      return;
+    }
+    if (profileData?.penalty.minimumTime.enabled && !this.confirmedMinOverride) {
+      this.minTimeToConfirm = profileData.penalty.minimumTime.max;
+      let iterations;
+      if (profileData.iterations.fix) {
+        iterations = profileData.iterations.fix;
+      }
+      else {
+        iterations = profileData.iterations.max;
+      }
+      this.minTimeToConfirm = iterations * profileData.penalty.minimumTime.max;
+      this.confirmationMinInput = '';
+      this.modalService.open(this.overrideMinWarning, {
+        size: "xl",
+        centered: true,
+        scrollable: true,
+      }).result.then((confirmed) => {
+        this.confirmedMinOverride = true;
+        this.step2Confirm(profileData);
+      }, (dismissed) => {
+        this.confirmedMinOverride = false;
       });
       return;
     }

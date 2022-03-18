@@ -18,6 +18,7 @@ export interface MinMaxEnabled extends MinMax {
 
 export interface PenaltyData {
   time: MinMaxEnabled;
+  minimumTime: MinMaxEnabled;
   requirements: MinMaxEnabled;
 }
 

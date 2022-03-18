@@ -17,6 +17,11 @@
         "min": 10,
         "max": 120
       },
+      "minimumTime": {
+        "enabled": false,
+        "min": 1,
+        "max": 3600
+      },
       "requirements": {
         "enabled": false,
         "min": 0,
@@ -41,6 +46,11 @@
         "enabled": true,
         "min": 600,
         "max": 1800
+      },
+      "minimumTime": {
+        "enabled": false,
+        "min": 1,
+        "max": 3600
       },
       "requirements": {
         "enabled": true,
@@ -67,6 +77,11 @@
         "min": 1800,
         "max": 21600
       },
+      "minimumTime": {
+        "enabled": false,
+        "min": 1,
+        "max": 3600
+      },
       "requirements": {
         "enabled": true,
         "min": 1,
@@ -91,6 +106,11 @@
         "enabled": true,
         "min": 14400,
         "max": 86400
+      },
+      "minimumTime": {
+        "enabled": false,
+        "min": 1,
+        "max": 3600
       },
       "requirements": {
         "enabled": true,
@@ -117,6 +137,11 @@
         "min": 86400,
         "max": 864000
       },
+      "minimumTime": {
+        "enabled": false,
+        "min": 1,
+        "max": 3600
+      },
       "requirements": {
         "enabled": true,
         "min": 5,
@@ -141,6 +166,11 @@
         "enabled": true,
         "min": 86400,
         "max": 1296000
+      },
+      "minimumTime": {
+        "enabled": false,
+        "min": 1,
+        "max": 3600
       },
       "requirements": {
         "enabled": true,
@@ -171,6 +201,11 @@
         "enabled": true,
         "min": 1,
         "max": 10000
+      },
+      "minimumTime": {
+        "enabled": false,
+        "min": 1,
+        "max": 3600
       }
     }
   },
@@ -191,6 +226,11 @@
         "enabled": true,
         "min": 1,
         "max": 31449600
+      },
+      "minimumTime": {
+        "enabled": false,
+        "min": 1,
+        "max": 3600
       },
       "requirements": {
         "enabled": true,

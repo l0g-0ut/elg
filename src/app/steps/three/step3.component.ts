@@ -2,9 +2,11 @@ import {AfterViewInit, Component, Input, OnInit} from "@angular/core";
 import {ApiData} from "../../model/api-data";
 import {ProfileData} from "../../services/profile.service";
 import {EmlalockService} from "../../services/emlalock.service";
+import {min} from "rxjs";
 
 export interface Iteration {
   addingTime: number;
+  addingMinTime: number;
   addingReq: number;
   sleepSecs: number;
   iteration: number;
@@ -32,26 +34,35 @@ export class Step3Component implements OnInit, AfterViewInit {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  private addRequirements(requirements: number): void {
+  private addRequirementsAndMinimumTime(requirements: number, minSeconds: number): void {
     if (requirements > 0) {
       this.emlalockService.addRequirements(requirements, this.apiData).subscribe((value) => {
-        // fine!
+        this.addMinimumTime(minSeconds);
       }, (error) => {
         // don't worry
       });
     }
+    else {
+      this.addMinimumTime(minSeconds);
+    }
   }
 
-  private addTimeAndRequirements(seconds: number, requirements: number): void {
+  private addTimeAndRequirements(seconds: number, requirements: number, minSeconds: number): void {
     if (seconds > 0) {
       this.emlalockService.addTime(seconds, this.apiData).subscribe((value) => {
-        this.addRequirements(requirements);
+        this.addRequirementsAndMinimumTime(requirements, minSeconds);
       }, (error) => {
         this.error = true;
       });
     }
     else {
-      this.addRequirements(requirements);
+      this.addRequirementsAndMinimumTime(requirements, minSeconds);
+    }
+  }
+
+  private addMinimumTime(seconds: number): void {
+    if (seconds > 0) {
+      this.emlalockService.addMinimumTime(seconds, this.apiData).subscribe((value) => {}, (error) => {});
     }
   }
 
@@ -61,16 +72,22 @@ export class Step3Component implements OnInit, AfterViewInit {
     }
     const numOfIterations = this.profileData.iterations.fix !== null ? this.profileData.iterations.fix : Step3Component.getRandomInt(this.profileData.iterations.min, this.profileData.iterations.max);
     let seconds = 0;
+    let minSeconds = 0;
     let requirements = 0;
     let iteration = 0;
     for (let i = 1; i <= numOfIterations; i++) {
       iteration++;
-      let addSeconds = 0
+      let addSeconds = 0;
       if (this.profileData.penalty.time.enabled) {
         addSeconds = Step3Component.getRandomInt(this.profileData.penalty.time.min, this.profileData.penalty.time.max);
       }
       seconds += addSeconds;
-      let addRequirements = 0
+      let addMinSeconds = 0;
+      if (this.profileData.penalty.minimumTime.enabled) {
+        addMinSeconds = Step3Component.getRandomInt(this.profileData.penalty.minimumTime.min, this.profileData.penalty.time.max);
+      }
+      minSeconds += addMinSeconds;
+      let addRequirements = 0;
       if (this.profileData.penalty.requirements.enabled) {
         addRequirements = Step3Component.getRandomInt(this.profileData.penalty.requirements.min, this.profileData.penalty.requirements.max);
       }
@@ -78,6 +95,7 @@ export class Step3Component implements OnInit, AfterViewInit {
       this.iterations.push({
         sleepSecs: Step3Component.getRandomInt(this.profileData.sleeps.min, this.profileData.sleeps.max),
         addingTime: addSeconds,
+        addingMinTime: addMinSeconds,
         addingReq: addRequirements,
         iteration: iteration,
       });
@@ -85,14 +103,14 @@ export class Step3Component implements OnInit, AfterViewInit {
     if ((this.profileData.overrideMaximumTime === true) && (seconds > 0)) {
       this.emlalockService.addMaximumTime(seconds, this.apiData).subscribe(() => {
         setTimeout(() => {
-          this.addTimeAndRequirements(seconds, requirements);
+          this.addTimeAndRequirements(seconds, requirements, minSeconds);
         }, 1000);
       }, (error) => {
         this.error = true;
       });
     }
     else {
-      this.addTimeAndRequirements(seconds, requirements);
+      this.addTimeAndRequirements(seconds, requirements, minSeconds);
     }
   }
 

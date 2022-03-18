@@ -26,22 +26,42 @@
   </div>
 </div>
 
-<ng-template #overrideWarning let-overrideWarningModal>
+<ng-template #overrideMaxWarning let-overrideMaxWarningModal>
     <div class="modal-header">
       <h4 class="modal-title text-danger"><fa-icon [icon]="faWarning" [fixedWidth]="true"></fa-icon> This profile will not respect your maximum time setting!</h4>
-      <button type="button" class="btn btn-close" aria-label="Close" (click)="overrideWarningModal.dismiss('cancel')"></button>
+      <button type="button" class="btn btn-close" aria-label="Close" (click)="overrideMaxWarningModal.dismiss('cancel')"></button>
     </div>
     <div class="modal-body text-black">
       <p>We need you to fully understand, that this profile will <strong>extend the maximum time</strong> you set for your session. This cannot be undone by yourself!</p>
       <p class="text-center text-danger border border-1 border-danger p-2 rounded rounded-2" *ngIf="maxTimeToConfirm > 0">The theoretical maximum of time that could be added with the currently selected profile would be<br><strong class="h3">{{maxTimeToConfirm|secTransform}}</strong></p>
       <div class="mt-1">
-        <label for="confirmationInputField" [ngClass]="{'form-label': true, 'text-success': confirmationInput.toLowerCase() === confirmationText.toLowerCase()}">If you really want to proceed, please type <strong>{{confirmationText}}</strong> into this text field:</label>
-        <input autocomplete="off" [placeholder]="confirmationText" [ngClass]="{'form-control': true, 'is-valid': confirmationInput.toLowerCase() === confirmationText.toLowerCase(), 'is-invalid': confirmationInput.toLowerCase() !== confirmationText.toLowerCase()}" type="text" id="confirmationInputField" [(ngModel)]="confirmationInput" [ngModelOptions]="{standalone: true}">
+        <label for="confirmationInputField" [ngClass]="{'form-label': true, 'text-success': confirmationMaxInput.toLowerCase() === confirmationMaxText.toLowerCase()}">If you really want to proceed, please type <strong>{{confirmationMaxText}}</strong> into this text field:</label>
+        <input autocomplete="off" [placeholder]="confirmationMaxText" [ngClass]="{'form-control': true, 'is-valid': confirmationMaxInput.toLowerCase() === confirmationMaxText.toLowerCase(), 'is-invalid': confirmationMaxInput.toLowerCase() !== confirmationMaxText.toLowerCase()}" type="text" id="confirmationInputField" [(ngModel)]="confirmationMaxInput" [ngModelOptions]="{standalone: true}">
         <small class="text-muted">A confirmation button will appear when input is correct.</small>
       </div>
     </div>
     <div class="modal-footer">
-      <button [hidden]="confirmationInput.toLowerCase() !== confirmationText.toLowerCase()" [disabled]="confirmationInput.toLowerCase() !== confirmationText.toLowerCase()" type="button" class="btn btn-danger" (click)="overrideWarningModal.close('okay')"><fa-icon [icon]="faWarning" [fixedWidth]="true"></fa-icon> Okay, override the maximum with no further warning!</button>
-      <button type="button" class="btn btn-outline-dark" (click)="overrideWarningModal.dismiss('cancel')"><fa-icon [icon]="faClose" [fixedWidth]="true"></fa-icon> Cancel</button>
+      <button [hidden]="confirmationMaxInput.toLowerCase() !== confirmationMaxText.toLowerCase()" [disabled]="confirmationMaxInput.toLowerCase() !== confirmationMaxText.toLowerCase()" type="button" class="btn btn-danger" (click)="overrideMaxWarningModal.close('okay')"><fa-icon [icon]="faWarning" [fixedWidth]="true"></fa-icon> Okay, override the maximum with no further warning!</button>
+      <button type="button" class="btn btn-outline-dark" (click)="overrideMaxWarningModal.dismiss('cancel')"><fa-icon [icon]="faClose" [fixedWidth]="true"></fa-icon> Cancel</button>
     </div>
+</ng-template>
+
+<ng-template #overrideMinWarning let-overrideMinWarningModal>
+  <div class="modal-header">
+    <h4 class="modal-title text-danger"><fa-icon [icon]="faWarning" [fixedWidth]="true"></fa-icon> This profile will add time to your Minimum Time setting!</h4>
+    <button type="button" class="btn btn-close" aria-label="Close" (click)="overrideMinWarningModal.dismiss('cancel')"></button>
+  </div>
+  <div class="modal-body text-black">
+    <p>We need you to fully understand, that this profile will <strong>add time to your Minimum Time</strong> you set for your session. This cannot be undone by yourself!</p>
+    <p class="text-center text-danger border border-1 border-danger p-2 rounded rounded-2" *ngIf="minTimeToConfirm > 0">The theoretical maximum of time that could be added with the currently selected profile would be<br><strong class="h3">{{minTimeToConfirm|secTransform}}</strong></p>
+    <div class="mt-1">
+      <label for="confirmationInputFieldMin" [ngClass]="{'form-label': true, 'text-success': confirmationMinInput.toLowerCase() === confirmationMinText.toLowerCase()}">If you really want to proceed, please type <strong>{{confirmationMinText}}</strong> into this text field:</label>
+      <input autocomplete="off" [placeholder]="confirmationMinText" [ngClass]="{'form-control': true, 'is-valid': confirmationMinInput.toLowerCase() === confirmationMinText.toLowerCase(), 'is-invalid': confirmationMinInput.toLowerCase() !== confirmationMinText.toLowerCase()}" type="text" id="confirmationInputFieldMin" [(ngModel)]="confirmationMinInput" [ngModelOptions]="{standalone: true}">
+      <small class="text-muted">A confirmation button will appear when input is correct.</small>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button [hidden]="confirmationMinInput.toLowerCase() !== confirmationMinText.toLowerCase()" [disabled]="confirmationMinInput.toLowerCase() !== confirmationMinText.toLowerCase()" type="button" class="btn btn-danger" (click)="overrideMinWarningModal.close('okay')"><fa-icon [icon]="faWarning" [fixedWidth]="true"></fa-icon> Okay, override the minimum with no further warning!</button>
+    <button type="button" class="btn btn-outline-dark" (click)="overrideMinWarningModal.dismiss('cancel')"><fa-icon [icon]="faClose" [fixedWidth]="true"></fa-icon> Cancel</button>
+  </div>
 </ng-template>

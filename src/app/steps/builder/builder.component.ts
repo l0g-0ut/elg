@@ -41,6 +41,8 @@ export class BuilderComponent {
     sleepMax: <string | null> null,
     timeMin: <string | null> null,
     timeMax: <string | null> null,
+    minTimeMin: <string | null> null,
+    minTimeMax: <string | null> null,
     reqMin: <string | null> null,
     reqMax: <string | null> null,
   };
@@ -172,6 +174,34 @@ export class BuilderComponent {
       // No time
       this.errors.timeMin = null;
       this.errors.timeMax = null;
+    }
+    if (this.profileData.settings.penalty.minimumTime.enabled) {
+      let minTimeOkay = false;
+      // validate time
+      if (!Number.isSafeInteger(this.profileData.settings.penalty.minimumTime.min) || this.profileData.settings.penalty.minimumTime.min < 1) {
+        this.errors.minTimeMin = 'Please enter a valid time.';
+        validated = false;
+      }
+      else {
+        this.errors.minTimeMin = null;
+        minTimeOkay = true;
+      }
+      if (!Number.isSafeInteger(this.profileData.settings.penalty.minimumTime.max) || this.profileData.settings.penalty.minimumTime.max < 1) {
+        this.errors.minTimeMax = 'Please enter a valid time.';
+        validated = false;
+      }
+      else {
+        this.errors.minTimeMax = null;
+        if (minTimeOkay && this.profileData.settings.penalty.minimumTime.max <= this.profileData.settings.penalty.minimumTime.min) {
+          this.errors.minTimeMax = 'The max must be higher than the min.';
+          validated = false;
+        }
+      }
+    }
+    else {
+      // No time
+      this.errors.minTimeMin = null;
+      this.errors.minTimeMax = null;
     }
     if (this.profileData.settings.penalty.requirements.enabled) {
       let minReqOkay = false;
