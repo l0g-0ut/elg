@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {ApiData} from "../../model/api-data";
-import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
+import {faInfoCircle, faMagnifyingGlass, faSquarePlus} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'step1',
@@ -13,9 +13,12 @@ export class Step1Component {
   keyPattern = '^[a-z0-9]{10,16}$'
 
   faInfo = faInfoCircle;
+  faCreate = faSquarePlus;
+  faPreview = faMagnifyingGlass
 
   @Input() public apiData!: ApiData;
   @Output() callback = new EventEmitter<boolean>();
+  @Output() previewOpener = new EventEmitter<boolean>();
 
   apiUserValidated: boolean | null = null;
   apiKeyValidated: boolean | null = null;

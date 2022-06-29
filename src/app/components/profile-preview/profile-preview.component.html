@@ -1,0 +1,76 @@
+<ng-container *ngIf="error != null">
+  <div class="alert alert-danger"><strong>Uuups...</strong> Unable to load profile data: {{error}}</div>
+</ng-container>
+
+<ng-container *ngIf="profileData != null">
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+        <ng-container *ngFor="let item of profileDataKeys">
+          <tr>
+            <th class="punish bg-dark text-white h4" colspan="3">{{item}}</th>
+          </tr>
+          <tr>
+            <th># of Iterations</th>
+            <th>For each iteration</th>
+            <th>Remarks</th>
+          </tr>
+          <tr>
+            <td>
+              <ng-container *ngIf="profileData[item].iterations.fix !== null">
+                Fixed: {{profileData[item].iterations.fix}}
+              </ng-container>
+              <ng-container *ngIf="profileData[item].iterations.fix === null">
+                <b class="text-warning">RANDOM</b><br>between {{ profileData[item].iterations.min }} and {{ profileData[item].iterations.max }}
+              </ng-container>
+            </td>
+            <td>
+              <dl>
+                <dt>Sleep time before every iteration</dt>
+                <dd class="ms-3 mb-2">
+                  <b class="text-warning">RANDOM</b> between <i>{{ profileData[item].sleeps.min|secTransform }}</i> and <i>{{ profileData[item].sleeps.max|secTransform }}</i>
+                </dd>
+                <dt>Time to be added to your duration</dt>
+                <dd class="ms-3 mb-2">
+                  <ng-container *ngIf="profileData[item].penalty.time.enabled === true">
+                    <b class="text-warning">RANDOM</b> between <i>{{ profileData[item].penalty.time.min|secTransform }}</i> and <i>{{ profileData[item].penalty.time.max|secTransform }}</i>
+                  </ng-container>
+                  <ng-container *ngIf="profileData[item].penalty.time.enabled !== true">
+                    <i>No time will be added</i>
+                  </ng-container>
+                </dd>
+                <dt>Time to be added to your Minimum Time</dt>
+                <dd class="ms-3 mb-2">
+                  <ng-container *ngIf="profileData[item].penalty.minimumTime.enabled === true">
+                    <b class="text-warning">RANDOM</b> between <i>{{ profileData[item].penalty.minimumTime.min|secTransform }}</i> and <i>{{ profileData[item].penalty.minimumTime.max|secTransform }}</i>
+                  </ng-container>
+                  <ng-container *ngIf="profileData[item].penalty.minimumTime.enabled !== true">
+                    <i>No time will be added</i>
+                  </ng-container>
+                </dd>
+                <dt>Required link clicks to be added</dt>
+                <dd class="ms-3 mb-2">
+                  <ng-container *ngIf="profileData[item].penalty.requirements.enabled === true">
+                    <b class="text-warning">RANDOM</b> between <i>{{ profileData[item].penalty.requirements.min }}</i> and <i>{{ profileData[item].penalty.requirements.max }}</i>
+                  </ng-container>
+                  <ng-container *ngIf="profileData[item].penalty.requirements.enabled !== true">
+                    <i>No required click will be added</i>
+                  </ng-container>
+                </dd>
+              </dl>
+            </td>
+            <td>
+              <override-maximum [value]="profileData[item].overrideMaximumTime"></override-maximum>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="profileData == null && error == null">
+  <div class="text-center p-5">
+    <fa-icon size="10x" [spin]="true" [fixedWidth]="true" [icon]="faLoading"></fa-icon>
+  </div>
+</ng-container>

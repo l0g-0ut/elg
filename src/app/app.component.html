@@ -14,7 +14,7 @@
   <div class="card bg-light text-dark">
     <h1 class="card-header">{{title}}</h1>
     <div class="card-body">
-      <step1 *ngIf="currentStep == 1" [apiData]="apiData" (callback)="onConfirm($event)"></step1>
+      <step1 *ngIf="currentStep == 1" [apiData]="apiData" (callback)="onConfirm($event)" (previewOpener)="openPreview()"></step1>
       <step2 *ngIf="currentStep == 2" (callback)="onConfirm($event)"></step2>
       <step3 *ngIf="currentStep == 3" [apiData]="apiData" [profileData]="profileData"></step3>
       <builder *ngIf="currentStep == -1"></builder>
@@ -63,5 +63,18 @@
   <div class="modal-footer">
     <button [hidden]="confirmationMinInput.toLowerCase() !== confirmationMinText.toLowerCase()" [disabled]="confirmationMinInput.toLowerCase() !== confirmationMinText.toLowerCase()" type="button" class="btn btn-danger" (click)="overrideMinWarningModal.close('okay')"><fa-icon [icon]="faWarning" [fixedWidth]="true"></fa-icon> Okay, override the minimum with no further warning!</button>
     <button type="button" class="btn btn-outline-dark" (click)="overrideMinWarningModal.dismiss('cancel')"><fa-icon [icon]="faClose" [fixedWidth]="true"></fa-icon> Cancel</button>
+  </div>
+</ng-template>
+
+<ng-template #profilePreviewer let-profilePreviewerModal>
+  <div class="modal-header">
+    <h4 class="modal-title text-dark">Our predefined profiles</h4>
+    <button type="button" class="btn btn-close" aria-label="Close" (click)="profilePreviewerModal.dismiss('cancel')"></button>
+  </div>
+  <div class="modal-body text-black">
+    <profile-preview></profile-preview>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="profilePreviewerModal.dismiss('cancel')"><fa-icon [icon]="faClose" [fixedWidth]="true"></fa-icon> Close</button>
   </div>
 </ng-template>

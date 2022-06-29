@@ -15,6 +15,7 @@ import {TimeinputComponent} from "./components/timeinput/timeinput.component";
 import {RouterModule} from "@angular/router";
 import {CustomComponent} from "./steps/custom/custom.component";
 import {OverrideMaximumComponent} from "./components/override-maximum/override-maximum.component";
+import {ProfilePreviewComponent} from "./components/profile-preview/profile-preview.component";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {OverrideMaximumComponent} from "./components/override-maximum/override-m
     SecTransformPipe,
     TimeinputComponent,
     OverrideMaximumComponent,
+    ProfilePreviewComponent,
   ],
   imports: [
     RouterModule.forRoot([]),

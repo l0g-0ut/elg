@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild("overrideMaxWarning") overrideMaxWarning!: any;
   @ViewChild("overrideMinWarning") overrideMinWarning!: any;
+  @ViewChild("profilePreviewer") profilePreviewer!: any;
 
   private step1Confirm() {
     if (this.apiData.apiKey != '' && this.apiData.apiUser != '') {
@@ -146,6 +147,14 @@ export class AppComponent implements OnInit {
       if (predefinedProfile) {
         this.handlePredefinedProfile(predefinedProfile);
       }
+    });
+  }
+
+  openPreview(): void {
+    this.modalService.open(this.profilePreviewer, {
+      size: "xl",
+      centered: true,
+      scrollable: true,
     });
   }
 
