@@ -144,8 +144,8 @@
       },
       "requirements": {
         "enabled": true,
-        "min": 5,
-        "max": 25
+        "min": 2,
+        "max": 5
       }
     }
   },
@@ -175,7 +175,7 @@
       "requirements": {
         "enabled": true,
         "min": 5,
-        "max": 25
+        "max": 10
       }
     }
   },
