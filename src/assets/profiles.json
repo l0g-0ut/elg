@@ -85,7 +85,7 @@
       "requirements": {
         "enabled": true,
         "min": 1,
-        "max": 10
+        "max": 5
       }
     }
   },
@@ -114,8 +114,8 @@
       },
       "requirements": {
         "enabled": true,
-        "min": 2,
-        "max": 15
+        "min": 5,
+        "max": 25
       }
     }
   },
@@ -144,8 +144,8 @@
       },
       "requirements": {
         "enabled": true,
-        "min": 5,
-        "max": 15
+        "min": 1,
+        "max": 5
       }
     }
   },
@@ -175,7 +175,7 @@
       "requirements": {
         "enabled": true,
         "min": 1,
-        "max": 10
+        "max": 2
       }
     }
   },
@@ -200,7 +200,7 @@
       "requirements": {
         "enabled": true,
         "min": 1,
-        "max": 10000
+        "max": 1000
       },
       "minimumTime": {
         "enabled": false,
@@ -235,7 +235,7 @@
       "requirements": {
         "enabled": true,
         "min": 1,
-        "max": 100
+        "max": 10
       }
     }
   }
