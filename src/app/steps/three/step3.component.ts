@@ -2,7 +2,6 @@ import {AfterViewInit, Component, Input, OnInit} from "@angular/core";
 import {ApiData} from "../../model/api-data";
 import {ProfileData} from "../../services/profile.service";
 import {EmlalockService} from "../../services/emlalock.service";
-import {min} from "rxjs";
 
 export interface Iteration {
   addingTime: number;
@@ -106,7 +105,14 @@ export class Step3Component implements OnInit, AfterViewInit {
           this.addTimeAndRequirements(seconds, requirements, minSeconds);
         }, 1000);
       }, (error) => {
-        this.error = true;
+        if (error.status === 400) {  // Workaround for Issue #4
+          // User might have disabled "Maximum Time" - just send the time-and-requirements request
+          this.addTimeAndRequirements(seconds, requirements, minSeconds);
+        }
+        else {
+          // Any other error, even client side ones.
+          this.error = true;
+        }
       });
     }
     else {
