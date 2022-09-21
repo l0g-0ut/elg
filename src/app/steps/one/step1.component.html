@@ -22,7 +22,7 @@
     <h2 class="text-center">Build a profile yourself</h2>
     <div class="d-grid gap-3">
       <p>You can create a profile and share it with a generated link. Use this option to build a custom setup tailored for your wearer.</p>
-      <button class="btn btn-outline-success btn-lg text-center" (click)="callback.emit(false)">
+      <button class="btn btn-outline-success btn-lg text-center" (click)="callback.emit(false)" type="button">
         <fa-icon size="8x" [icon]="faCreate" [fixedWidth]="true"></fa-icon>
         <br>Create a Profile
       </button>
@@ -31,7 +31,7 @@
     <h2 class="text-center">Want a preview?</h2>
     <div class="d-grid gap-3">
       <p>Don't know our standard profiles? Take a sneak peak here, without using your API credentials.</p>
-      <button class="btn btn-info btn-lg text-center" (click)="previewOpener.emit(true)">
+      <button class="btn btn-info btn-lg text-center" (click)="previewOpener.emit(true)" type="button">
         <fa-icon size="3x" [icon]="faPreview" [fixedWidth]="true"></fa-icon>
         <br>Preview Profiles
       </button>
