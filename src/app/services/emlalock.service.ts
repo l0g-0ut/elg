@@ -8,16 +8,26 @@ import {HttpClient} from "@angular/common/http";
 })
 export class EmlalockService {
 
-  public addTime(seconds: number, apiData: ApiData): Observable<any> {
+  public addTime(seconds: number, apiData: ApiData, message?: string): Observable<any> {
+    let params: {[key: string]: string|number} = {
+      'userid': apiData.apiUser,
+      'apikey': apiData.apiKey,
+      'value': seconds,
+    }
+    if (message) {
+      let userMessage: string = message + " ";
+      let addMessage: string = "";
+      do {
+        userMessage = userMessage.slice(0, -1);
+        addMessage = encodeURIComponent(userMessage);
+      } while (addMessage.length > 49);
+      params['text'] = userMessage;
+    }
     return this.http.get<any>('https://api.emlalock.com/add', {
       headers: {
         'Accept': 'application/json',
       },
-      params: {
-        'userid': apiData.apiUser,
-        'apikey': apiData.apiKey,
-        'value': seconds,
-      }
+      params: params,
     });
   }
 

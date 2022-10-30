@@ -48,7 +48,7 @@ export class Step3Component implements OnInit, AfterViewInit {
 
   private addTimeAndRequirements(seconds: number, requirements: number, minSeconds: number): void {
     if (seconds > 0) {
-      this.emlalockService.addTime(seconds, this.apiData).subscribe((value) => {
+      this.emlalockService.addTime(seconds, this.apiData, "Compliments from l0g-0ut.github.io/elg").subscribe((value) => {
         this.addRequirementsAndMinimumTime(requirements, minSeconds);
       }, (error) => {
         this.error = true;
