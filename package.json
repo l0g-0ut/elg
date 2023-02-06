@@ -1,6 +1,6 @@
 {
   "name": "lock-game",
-  "version": "5.0.1",
+  "version": "6.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

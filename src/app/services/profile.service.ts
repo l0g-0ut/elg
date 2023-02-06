@@ -23,7 +23,7 @@ export interface PenaltyData {
 }
 
 export interface ProfileData {
-  inFeelingLucy: boolean;
+  inFeelingLucky: boolean;
   iterations: MinMaxFix;
   sleeps: MinMax;
   penalty: PenaltyData;

@@ -34,7 +34,7 @@ export class UserDefinedLink {
         min: 10,
         max: 60,
       },
-      inFeelingLucy: false,
+      inFeelingLucky: false,
       overrideMaximumTime: false,
     }
   ) {}
